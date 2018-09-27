@@ -1,0 +1,37 @@
+########################################
+##      Flight Reservation System        ##
+########################################
+# Docker system composition descriptor #
+########################################
+# Author: Génovèse Matthieu           #
+# Version: 1.0                         #
+########################################
+
+## Start the system with "docker-compose up -d"
+## Shutdown it with "docker-compose down"
+## To clean your docker install: "docker system prune"
+## To purge your docker install: "docker system prune -a"
+
+version: '3'
+
+services:
+
+
+      
+  ordersfood-orderFood:               # Flight reservation registry, on port 9080
+    container_name: ordersfood
+    image: uberoo/ordersfood-document
+    depends_on:
+      - database
+    ports:
+      - "9080:8080"
+
+
+  database:                       # MongoDB database, on port 27017
+    container_name: tcs-database
+    image: mongo:3.0
+    volumes:
+      - "./mongo_data:/data/db"
+    ports:
+      - "27017:27017"
+
