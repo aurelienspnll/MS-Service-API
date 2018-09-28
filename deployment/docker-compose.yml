@@ -31,6 +31,12 @@ services:
     ports:
       - "9080:8080"
 
+  deliver:                # Tax Computation, on port 9090
+    container_name: deliver
+    image: uberoo/deliver-rpc
+    ports:
+      - "9070:8080"
+
 
   database:                       # MongoDB database, on port 27017
     container_name: tcs-database
