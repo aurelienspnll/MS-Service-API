@@ -25,9 +25,9 @@ si ce n'est pas le cas : sudo service docker start
  
   ### 3. Service document orderFood (pour commander du KFC)
 
-Header: Content-type: application/json
-Body -> raw -> application/json
-Post   http://localhost:9080/order-service-document/orderFood
+- Header: Content-type: application/json
+- Body -> raw -> application/json
+- Post   http://localhost:9080/order-service-document/orderFood
 
 Requête:
 { "event": "ORDER", "orderFood": { "id":"23", "nameOfFood":"sandwitch KFC", "nameOfClient":"toto", "addressDestination":"3 avenue promenade des anglais"}
