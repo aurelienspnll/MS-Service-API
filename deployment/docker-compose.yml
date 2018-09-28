@@ -17,8 +17,13 @@ version: '3'
 services:
 
 
-      
-  ordersfood-orderFood:               # Flight reservation registry, on port 9080
+  cataloguefood:
+    container_name: cataloguefood
+    image: uberoo/cataloguefood-rest
+    ports:
+      - "9090:8080"
+
+  ordersfood:               # Flight reservation registry, on port 9080
     container_name: ordersfood
     image: uberoo/ordersfood-document
     depends_on:

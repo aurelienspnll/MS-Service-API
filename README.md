@@ -39,3 +39,9 @@ Requête:
 Requête:
 { "event": "CONSULT"}
 
+
+## 4. Docker ???
+
+Docker permet d’exécuter nos services et des services extérieurs à l’intérieur de conteneurs.
+Sachant que chaque conteneur vit sa vie et gère son propre environnement d’exécution, cela
+nous permet d’avoir chaque service conteneurisé comme une boite noire.

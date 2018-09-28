@@ -17,6 +17,7 @@
     </parent>
 
     <modules>
+        <module>resource</module>
         <module>document</module>
     </modules>
 
