@@ -18,7 +18,7 @@ public class Meal
         this.price = data.getString("price");
     }
 
-    public Meal() {} // ne pas enlever, c'est pour instancier la class avec findOne(...OrderFood.class)
+    public Meal() {}
 
     JSONObject toJson() {
         return new JSONObject()

@@ -17,32 +17,48 @@ version: '3'
 services:
 
 
-  cataloguefood:
-    container_name: cataloguefood
-    image: uberoo/cataloguefood-rest
-    ports:
-      - "9090:8080"
-
-  ordersfood:               # Flight reservation registry, on port 9080
+  ordersfood:               # service orders, on port 9080
     container_name: ordersfood
     image: uberoo/ordersfood-document
     depends_on:
-      - database
+      - database1
     ports:
       - "9080:8080"
 
-  deliver:                # Tax Computation, on port 9090
+  database1:                       # MongoDB database : orders, on port 27017
+    container_name: orders-database
+    image: mongo:3.0
+    volumes:
+      - "./mongo_data1:/data/db"
+    ports:
+      - "27017:27017"
+
+
+  cataloguefood:            # service catalogue, on port 9090
+    container_name: cataloguefood
+    image: uberoo/cataloguefood-rest
+    depends_on:
+          - database2
+    ports:
+      - "9090:8080"
+
+  database2:                       # MongoDB database : catalogue, on port 27017
+    container_name: catalogue-database
+    image: mongo:3.0
+    volumes:
+      - "./mongo_data2:/data/db"
+    ports:
+      - "27019:27017"
+
+  deliver:                # service deliver , on port 9070
     container_name: deliver
     image: uberoo/deliver-rpc
     ports:
       - "9070:8080"
 
 
-  database:                       # MongoDB database, on port 27017
-    container_name: tcs-database
-    image: mongo:3.0
-    volumes:
-      - "./mongo_data:/data/db"
-    ports:
-      - "27017:27017"
+
+
+
+
 

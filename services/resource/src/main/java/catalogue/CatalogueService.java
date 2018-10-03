@@ -1,6 +1,7 @@
 package catalogue;
 
 import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
 import org.jongo.Jongo;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -19,14 +20,17 @@ public class CatalogueService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getClichedMessage() {
+    public Response getAllMeals(@QueryParam("maxPrice") String maxPrice) {
+        if(maxPrice == null){
+            maxPrice = "1000";
+        }
         MongoCollection meals = getMeals();
         MongoCursor<Meal> cursor = meals.find().as(Meal.class);
         JSONArray array = new JSONArray();
         while(cursor.hasNext()) {
             array.put(cursor.next().toJson());
         }
-        return Response.ok().entity(array.toString()).build();
+        return Response.ok().entity(filterMealsByPrice(array,maxPrice).toString()).build();
     }
 
 
@@ -47,5 +51,20 @@ public class CatalogueService {
     private static MongoCollection getMeals() {
         MongoClient client = new MongoClient(Network.HOST, Network.PORT);
         return new Jongo(client.getDB(Network.DATABASE)).getCollection(Network.COLLECTION);
+    }
+
+
+    private JSONArray filterMealsByPrice(JSONArray array,String maxPrice){
+        JSONArray filteredMeals = new JSONArray();
+        JSONObject object;
+        String objectPrice;
+        for(int i = 0; i< array.length(); i++){
+            object = (JSONObject) array.get(i);
+            objectPrice = object.getString("price");
+            if( Double.parseDouble(objectPrice) <= Double.parseDouble(maxPrice) ){
+                filteredMeals.put(object);
+            }
+        }
+        return filteredMeals;
     }
 }

@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
 import org.json.JSONObject;
 import static orderfood.Handler.*;
 
-@Path("/orderFood")
+@Path("/ordersFood")
 @Produces(MediaType.APPLICATION_JSON)
 public class Order {
 

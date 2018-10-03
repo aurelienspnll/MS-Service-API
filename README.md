@@ -28,19 +28,51 @@ si ce n'est pas le cas : sudo service docker start
   installer un logiciel pour tester les requetes tel que Postman: https://www.getpostman.com/apps
 
 
-- Post   http://localhost:9080/order-service-document/orderFood
-- Header: Content-type: application/json
+- Post   http://localhost:9080/order-service-document/ordersFood
 - Body -> raw -> application/json
 
-Requête:
+Requête: pour faire une commande
+
 { "event": "ORDER", "orderFood": { "id":"23", "nameOfFood":"sandwitch KFC", "nameOfClient":"toto", "addressDestination":"3 avenue promenade des anglais"}
 }
 
-Requête:
+Requête: pour valider une commande
+
 { "event": "VALIDATE", "id":"23" , "validate":true}
 
-Requête:
+Requête: pour avoir toutes les commandes
+
 { "event": "CONSULT"}
+
+Requête: pour purger la bd
+
+{ "event": "PURGE"} 
+
+### 3. Service ressource catalogue de repas
+
+
+Requete: pour ajouter des repas dans le catalogue
+
+- Post   http://localhost:9090/catalogue-service-rest/meals
+- Body -> raw -> application/json
+
+{ "name":"tarte au pomme"  "description":"tarte avec de la pomme et du caramel" "price":"3" }
+
+Requete : pour afficher le catalogue :
+
+- Get   http://localhost:9090/catalogue-service-rest/meals
+
+On peut filtrer les repas qui sont dans nos moyens en ajoutant le queryParam  maxPrice pour avoir tous les repas qui ont un pris <= à la valeur mise :
+
+- Get  http://localhost:9090/catalogue-service-rest/meals?maxPrice=30  
+
+ici on a tous les repas <= 30 euros
+
+### 3. Service de livraison
+
+
+
+
 
 
 ## 4. Docker 
@@ -48,3 +80,16 @@ Requête:
 Docker permet d’exécuter nos services et des services extérieurs à l’intérieur de conteneurs.
 Sachant que chaque conteneur vit sa vie et gère son propre environnement d’exécution, cela
 nous permet d’avoir chaque service conteneurisé comme une boite noire.
+
+### Commandes utiles :
+
+voir les containers docker :
+- docker ps
+
+arreter et supprimer les containers docker :
+ - docker stop $(docker ps -a -q)
+ - docker rm $(docker ps -a -q)
+
+ 
+
+
