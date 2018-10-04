@@ -144,14 +144,25 @@ Ce paradigme nous permet de gérer tous ces cas utilisations avec des évènemen
 http://localhost:9070/deliver-service-document/foodDelivery
 
 
+## 5. Tests
 
-## 5. Docker 
+### 5.1 Environement 
+
+Attention pour faire les tests de charge, il faut une version de java compatible avec notre version de gatling et scala (Il existe des problèmes avec java 9 du coup:  utiliser java 1.8 pour lancer les tests de charges)
+
+### 5.2 Lancer les tests
+
+- Lancer les services (./install.sh puis ./run.sh) 
+- Lancer ./tests.sh
+
+
+## 6. Docker 
 
 Docker permet d’exécuter nos services et des services extérieurs à l’intérieur de conteneurs.
 Sachant que chaque conteneur vit sa vie et gère son propre environnement d’exécution, cela
 nous permet d’avoir chaque service conteneurisé comme une boite noire.
 
-### Commandes utiles :
+### 6.1 Commandes utiles :
 
 - Afficher les containers docker :
     - docker ps
@@ -159,6 +170,9 @@ nous permet d’avoir chaque service conteneurisé comme une boite noire.
 - Arreter et supprimer les containers docker :
     - docker stop $(docker ps -a -q)
     - docker rm $(docker ps -a -q)
+    
+    
+
 
  
 

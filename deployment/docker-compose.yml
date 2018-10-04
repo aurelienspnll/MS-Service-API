@@ -1,17 +1,3 @@
-########################################
-##      Flight Reservation System        ##
-########################################
-# Docker system composition descriptor #
-########################################
-# Author: Génovèse Matthieu           #
-# Version: 1.0                         #
-########################################
-
-## Start the system with "docker-compose up -d"
-## Shutdown it with "docker-compose down"
-## To clean your docker install: "docker system prune"
-## To purge your docker install: "docker system prune -a"
-
 version: '3'
 
 services:
@@ -50,11 +36,6 @@ services:
     ports:
       - "27019:27017"
 
-  deliver:                # service deliver , on port 9070
-    container_name: deliver
-    image: uberoo/deliver-rpc
-    ports:
-      - "9070:8080"
 
 
 
