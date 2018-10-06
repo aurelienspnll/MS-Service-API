@@ -42,7 +42,7 @@ public class OrderFood {
     }
 
 
-    JSONObject toJson() {
+    public JSONObject toJson() {
         return new JSONObject()
                 .put("id", id)
                 .put("nameOfFood", nameOfFood)
