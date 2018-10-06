@@ -1,6 +1,5 @@
-package delivery;
+package document;
 
-import orderfood.OrderFood;
 import org.jongo.marshall.jackson.oid.MongoObjectId;
 import org.json.JSONObject;
 
@@ -9,7 +8,7 @@ import java.util.Random;
 public class Delivery {
 
     private String id;
-    private OrderFood order;
+    private String idOrder;
     private String deliveryMan;
 
 
@@ -18,7 +17,7 @@ public class Delivery {
 
     public Delivery(JSONObject data) {
         this.id = data.getString("id");
-        this.order = new OrderFood(data.getJSONObject("order"));
+        this.idOrder = data.getString(("idOrder"));
         this.deliveryMan = data.getString("deliveryMan");
     }
 
@@ -28,6 +27,7 @@ public class Delivery {
     JSONObject toJson() {
         return new JSONObject()
                 .put("id", id)
-                .put("order", this.order.toJson());
+                .put("order", idOrder)
+                .put("deliveryMan", deliveryMan);
     }
 }

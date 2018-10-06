@@ -1,4 +1,4 @@
-package delivery;
+package document;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -8,9 +8,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.json.JSONObject;
 
-import static delivery.Handler.*;
+import static document.Handler.*;
 
-@Path("/delivery")
+@Path("/document")
 @Produces(MediaType.APPLICATION_JSON)
 public class Assignation {
 
