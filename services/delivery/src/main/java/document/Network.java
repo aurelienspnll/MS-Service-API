@@ -15,6 +15,6 @@ public class Network {
 
     static final String HOST = readProperties("databaseHostName");
     static final int PORT = Integer.parseInt(readProperties("databasePort"));
-    static final String DATABASE = "orders";
+    static final String DATABASE = "delivery-db";
     static final String COLLECTION = "delivery";
 }

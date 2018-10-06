@@ -18,5 +18,6 @@ build() { # $1: directory, $2: image_name
 # Build docker images
 echo "Building locals resources"
 
+build delivery uberoo/delivery-document
 build resource  uberoo/cataloguefood-rest
 build document  uberoo/ordersfood-document
