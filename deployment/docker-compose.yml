@@ -36,6 +36,21 @@ services:
     ports:
       - "27019:27017"
 
+  delivery:            # service delivery, on port 9090
+    container_name: delivery
+    image: uberoo/delivery-document
+    depends_on:
+          - database3
+    ports:
+      - "9090:8080"
+
+  database3:                       # MongoDB database : catalogue, on port 27021
+    container_name: delivery-database
+    image: mongo:3.0
+    volumes:
+      - "./mongo_data3:/data/db"
+    ports:
+      - "27021:27017"
 
 
 
