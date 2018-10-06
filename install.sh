@@ -20,4 +20,3 @@ echo "Building locals resources"
 
 build resource  uberoo/cataloguefood-rest
 build document  uberoo/ordersfood-document
-build rpc       uberoo/deliver-rpc
