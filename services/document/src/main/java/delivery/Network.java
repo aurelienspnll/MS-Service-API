@@ -1,4 +1,4 @@
-package document;
+package delivery;
 
 import java.util.Properties;
 import java.io.IOException;

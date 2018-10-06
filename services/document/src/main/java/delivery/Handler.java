@@ -1,4 +1,4 @@
-package document;
+package delivery;
 
 import com.mongodb.MongoClient;
 import org.bson.types.ObjectId;
@@ -41,7 +41,7 @@ public class Handler {
     }
 
     private static MongoCollection getDeliveries() {
-        MongoClient client = new MongoClient(Network.HOST, Network.PORT);
-        return new Jongo(client.getDB(Network.DATABASE)).getCollection(Network.COLLECTION);
+        MongoClient client = new MongoClient(delivery.Network.HOST, delivery.Network.PORT);
+        return new Jongo(client.getDB(delivery.Network.DATABASE)).getCollection(delivery.Network.COLLECTION);
     }
 }

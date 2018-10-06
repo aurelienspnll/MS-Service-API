@@ -19,7 +19,6 @@
     <modules>
         <module>resource</module>
         <module>document</module>
-        <module>delivery</module>
     </modules>
 
     <properties>
