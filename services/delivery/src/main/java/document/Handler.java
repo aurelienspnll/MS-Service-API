@@ -23,7 +23,7 @@ public class Handler {
 
     static JSONObject complete(JSONObject input) {
         String id = input.getString("id");
-        Delivery theOne = deliveries.findOne("{id:#}",id).as(Delivery.class);
+        Delivery theOne = deliveries.findOne("{id:#}", id).as(Delivery.class);
         if (null == theOne) {
             return new JSONObject().put("completed", false);
         }
@@ -33,6 +33,24 @@ public class Handler {
 
     static JSONObject list(JSONObject input) {
         MongoCursor<Delivery> cursor = deliveries.find().as(Delivery.class);
+        List array = new ArrayList();
+        while(cursor.hasNext()) {
+            array.add(cursor.next().toJson());
+        }
+        return new JSONObject().put("deliveries", array);
+    }
+
+    static JSONObject listCompleted(JSONObject input) {
+        MongoCursor<Delivery> cursor = deliveries.find("{delivered:true}").as(Delivery.class);
+        List array = new ArrayList();
+        while(cursor.hasNext()) {
+            array.add(cursor.next().toJson());
+        }
+        return new JSONObject().put("deliveries", array);
+    }
+
+    static JSONObject listNotCompleted(JSONObject input) {
+        MongoCursor<Delivery> cursor = deliveries.find("{delivered:false}").as(Delivery.class);
         List array = new ArrayList();
         while(cursor.hasNext()) {
             array.add(cursor.next().toJson());
