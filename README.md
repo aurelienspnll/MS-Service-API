@@ -148,14 +148,11 @@ L'objet JSON dans le body de la Requête pour supprimer une livraison:
 
 Nous avons choisi d'utiliser le paradigme *Resource* comme interface du service de catalogue de repas.
 Le catalogue est une ressources qui contient des repas auquel on pourrai y accéder par une URL : 
-http://localhost:9090/catalogue-service-rest/meals. 
+http://localhost:9090/food-service-rest/foods. 
 Ce paradigme nous offre une grande modularité: 
 
 - On pourrait ajouter un autre chemins très aisément afin de compléter ce service de catalogue comme par exemple :
-http://localhost:9090/catalogue-service-rest/meals/id_meals pour afficher le detail d'un repas.
-
-- Ce paradigme nous permet aussi de manipuler aisément les queryParameters. Dans notre cas nous avons utilisé les queryParameters pour borner notre liste de repas par rapport aux moyens financiers des acheteurs:
- http://localhost:9090/catalogue-service-rest/meals?maxPrice=30
+hhttp://localhost:9090/food-service-rest/foods/id_food pour afficher le detail d'un repas.
  
 ### 4.2 Service de commande :
 
