@@ -19,8 +19,7 @@ services:
     ports:
       - "27017:27017"
 
-
-  cataloguefood:            # service catalogue, on port 9090
+  cataloguefood:            # service food, on port 9090
     container_name: cataloguefood
     image: uberoo/cataloguefood-rest
     depends_on:
@@ -28,8 +27,8 @@ services:
     ports:
       - "9090:8080"
 
-  database2:                       # MongoDB database : catalogue, on port 27017
-    container_name: catalogue-database
+  database2:                       # MongoDB database : food, on port 27017
+    container_name: food-database
     image: mongo:3.0
     volumes:
       - "./mongo_data2:/data/db"

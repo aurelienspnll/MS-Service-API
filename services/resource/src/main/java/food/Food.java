@@ -1,24 +1,24 @@
-package catalogue;
+package food;
 
 import org.jongo.marshall.jackson.oid.MongoObjectId;
 import org.json.JSONObject;
 
-public class Meal
+public class Food
 {
     @MongoObjectId
     String _id;
 
     private String name;
     private String description;
-    private String price;
+    private double price;
 
-    public Meal(JSONObject data) {
+    public Food(JSONObject data) {
         this.name = data.getString("name");
         this.description = data.getString("description");
-        this.price = data.getString("price");
+        this.price = data.getDouble("price");
     }
 
-    public Meal() {}
+    public Food() {}
 
     JSONObject toJson() {
         return new JSONObject()

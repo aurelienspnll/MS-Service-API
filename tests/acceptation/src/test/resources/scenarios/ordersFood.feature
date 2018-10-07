@@ -1,4 +1,4 @@
-Feature: Order meal
+Feature: Order food
 
   #Background:
    # Given an empty orders deployed on localhost:9080

@@ -7,7 +7,7 @@ import javax.ws.rs.core.MediaType;
 import org.apache.cxf.jaxrs.client.WebClient;
 import static org.junit.Assert.*;
 
-public class OrderMealDefinition {
+public class OrderFoodDefinition {
 
 
     private String host = "host";

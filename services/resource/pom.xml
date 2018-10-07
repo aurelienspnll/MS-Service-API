@@ -44,7 +44,7 @@
     </dependencies>
 
     <build>
-        <finalName>catalogue-service-rest</finalName>
+        <finalName>food-service-rest</finalName>
     </build>
 
     
