@@ -95,6 +95,52 @@ Tous les repas <= 30 euros :
 
 ### 3.3 Service de livraison
 
+- Post   http://localhost:9100/delivery-service-document/delivery
+- Body -> raw -> application/json
+
+L'objet JSON dans le body de la Requête pour créer une livraison et l'assigner:
+```json
+{ 
+  "event" : "DELIVER", 
+  "delivery" : {
+    "deliveryMan": "Escobar",
+    "delivered": "false",
+    "id": "6",
+    "idOrder": "521"
+    }
+}
+```
+
+L'objet JSON dans le body de la Requête pour completer une livraison:
+```json
+{"event": "COMPLETE", "id":"6"}
+```
+
+L'objet JSON dans le body de la Requête pour consulter une livraison:
+```json
+{"event": "CONSULT", "id":"6"}
+```
+
+L'objet JSON dans le body de la Requête pour avoir toutes les livraisons:
+```json
+{"event": "LIST"}
+```
+
+L'objet JSON dans le body de la Requête pour avoir toutes les livraisons terminées:
+```json
+{"event": "LISTCOMPLETED"}
+```
+
+L'objet JSON dans le body de la Requête pour avoir toutes les livraisons non terminées:
+```json
+{"event": "LISTNOTCOMPLETED"}
+```
+
+L'objet JSON dans le body de la Requête pour supprimer une livraison:
+```json
+{"event": "DELETE", "id":"6"}
+```
+
 
 
 ## 4. Choix de conception pour les différents services
@@ -129,19 +175,23 @@ Ce paradigme nous permet ,à travers des évènements, de gérer tous ces cas ut
 
 ### 4.3 Service de livraison :
 
-Dans un premier temps, nous étions parti sur le paradigme RPC pour la livraison car nous pensions qu'une livraison se résumait à la procédure: *livrer(repas, destination)* mais nous nous sommes rendu compte qu'une livraison début lorsque l'on entre dans le system l'objet à livrer et se finir lorsque le client se fait livrer le repas. De ce fait, il y a là plusieurs cas utilisation :
+Dans un premier temps, nous étions parti sur le paradigme RPC pour la livraison car nous pensions qu'une livraison se résumait à la procédure: *livrer(repas, destination)* mais nous nous sommes rendu compte qu'une livraison débute lorsque l'on entre dans le system l'objet à livrer et se finir lorsque le client se fait livrer le repas. De ce fait, il y a là plusieurs cas utilisation :
 
 - Assigner à un livreur le repas à livrer.
 - Le livreur doit ensuite mettre dans le system la preuve que la livraison a été faite : facture du client.
 - Le patron peut consulter l'état des livraisons en cas de litige par exemple.
 
 Tous ces cas utilision se prète bien à des évènement tel que :
- - ASSIGN pour assigner à un livreur une livraison.
- - DELIVERED pour marquer la fin d'une livraison et y ajouter la facture.
- - CONSULT pour consulter l'état des livraisons.
+ - DELIVER pour ajouter une livraison et l'assigner à un livreur.
+ - COMPLETE pour marquer la fin d'une livraison et y ajouter la facture.
+ - CONSULT pour consulter une livraison en particulier.
+ - LIST pour consulter l'état des livraisons.
+ - LISTCOMPLETED pour consulter les livraisons effectuées.
+ - LISTNOTCOMPLETED pour consulter les livraisons en cours.
+ - DELETE pour supprimer les livraisons
 
 Ce paradigme nous permet de gérer tous ces cas utilisations avec des évènements sur la route: 
-http://localhost:9070/deliver-service-document/foodDelivery
+http://localhost:9100/delivery-service-document/delivery
 
 
 ## 5. Tests

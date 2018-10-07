@@ -10,7 +10,7 @@ import org.json.JSONObject;
 
 import static document.Handler.*;
 
-@Path("/document")
+@Path("/delivery")
 @Produces(MediaType.APPLICATION_JSON)
 public class Assignation {
 
@@ -22,10 +22,18 @@ public class Assignation {
         JSONObject obj = new JSONObject(input);
         try {
             switch (EVENT.valueOf(obj.getString("event"))) {
-                case REGISTER:
-                    return Response.ok().entity(delivery(obj).toString(INDENT_FACTOR)).build();
+                case DELIVER:
+                    return Response.ok().entity(deliver(obj).toString(INDENT_FACTOR)).build();
+                case COMPLETE:
+                    return Response.ok().entity(complete(obj).toString(INDENT_FACTOR)).build();
+                case CONSULT:
+                    return Response.ok().entity(consult(obj).toString(INDENT_FACTOR)).build();
                 case LIST:
                     return Response.ok().entity(list(obj).toString(INDENT_FACTOR)).build();
+                case LISTCOMPLETED:
+                    return Response.ok().entity(listCompleted(obj).toString(INDENT_FACTOR)).build();
+                case LISTNOTCOMPLETED:
+                    return Response.ok().entity(listNotCompleted(obj).toString(INDENT_FACTOR)).build();
                 case DELETE:
                     return Response.ok().entity(delete(obj).toString(INDENT_FACTOR)).build();
             }
