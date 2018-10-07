@@ -13,3 +13,13 @@ Feature: Delivery
             And the field deliveryMan has its value equals to Pablo
             And the field idOrder has its value equals to 34
             And the field validated has its value equals to false
+
+    Scenario: Validate a delevery
+        Given a delivery identified as 56
+            And is assigned to Pablo
+            And id order is 34
+        When the VALIDATE action is run
+        Then the delivery is registered
+            And the field deliveryMan has its value equals to Pablo
+            And the field idOrder has its value equals to 34
+            And the field validated has its value equals to true
