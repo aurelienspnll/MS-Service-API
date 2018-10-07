@@ -31,6 +31,15 @@ public class Handler {
         return new JSONObject().put("completed", true).put("delivery", theOne.toJson());
     }
 
+    static JSONObject consult(JSONObject input) {
+        String id = input.getString("id");
+        Delivery theOne = deliveries.findOne("{id:#}",id).as(Delivery.class);
+        if (null == theOne) {
+            return new JSONObject().put("consult", false);
+        }
+        return new JSONObject().put("consult", theOne.toJson());
+    }
+
     static JSONObject list(JSONObject input) {
         MongoCursor<Delivery> cursor = deliveries.find().as(Delivery.class);
         List array = new ArrayList();

@@ -116,6 +116,11 @@ L'objet JSON dans le body de la Requête pour completer une livraison:
 {"event": "COMPLETE", "id":"6"}
 ```
 
+L'objet JSON dans le body de la Requête pour consulter une livraison:
+```json
+{"event": "CONSULT", "id":"6"}
+```
+
 L'objet JSON dans le body de la Requête pour avoir toutes les livraisons:
 ```json
 {"event": "LIST"}
@@ -131,7 +136,7 @@ L'objet JSON dans le body de la Requête pour avoir toutes les livraisons non te
 {"event": "LISTNOTCOMPLETED"}
 ```
 
-L'objet JSON dans le body de la Requête pour purger la base de données:
+L'objet JSON dans le body de la Requête pour supprimer une livraison:
 ```json
 {"event": "DELETE", "id":"6"}
 ```
@@ -179,6 +184,7 @@ Dans un premier temps, nous étions parti sur le paradigme RPC pour la livraison
 Tous ces cas utilision se prète bien à des évènement tel que :
  - DELIVER pour ajouter une livraison et l'assigner à un livreur.
  - COMPLETE pour marquer la fin d'une livraison et y ajouter la facture.
+ - CONSULT pour consulter une livraison en particulier.
  - LIST pour consulter l'état des livraisons.
  - LISTCOMPLETED pour consulter les livraisons effectuées.
  - LISTNOTCOMPLETED pour consulter les livraisons en cours.
