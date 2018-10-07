@@ -15,10 +15,15 @@ public class Handler {
     private static MongoCollection deliveries = getDeliveries();
 
 
-    static JSONObject delivery(JSONObject input) {
+    static JSONObject deliver(JSONObject input) {
         Delivery data = new Delivery(input.getJSONObject("delivery"));
         deliveries.insert(data);
         return new JSONObject().put("inserted", true).put("delivery",data.toJson());
+    }
+
+    static JSONObject complete(JSONObject input) {
+        // TODO
+        return new JSONObject();
     }
 
     static JSONObject list(JSONObject input) {
