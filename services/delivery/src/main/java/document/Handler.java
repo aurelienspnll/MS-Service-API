@@ -77,6 +77,11 @@ public class Handler {
         return new JSONObject().put("deleted", true);
     }
 
+    static JSONObject deleteAll() {
+        deliveries.drop();
+        return new JSONObject().put("allDeleted", true);
+    }
+
     private static MongoCollection getDeliveries() {
         MongoClient client = new MongoClient(Network.HOST, Network.PORT);
         return new Jongo(client.getDB(Network.DATABASE)).getCollection(Network.COLLECTION);

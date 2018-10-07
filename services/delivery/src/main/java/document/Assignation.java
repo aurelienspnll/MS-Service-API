@@ -36,6 +36,8 @@ public class Assignation {
                     return Response.ok().entity(listNotCompleted(obj).toString(INDENT_FACTOR)).build();
                 case DELETE:
                     return Response.ok().entity(delete(obj).toString(INDENT_FACTOR)).build();
+                case CLEAN:
+                    return Response.ok().entity(deleteAll()).build();
             }
         }catch(Exception e) {
             JSONObject error = new JSONObject().put("error", e.toString());
