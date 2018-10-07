@@ -200,7 +200,7 @@ http://localhost:9100/delivery-service-document/delivery
 
 Attention pour faire les tests de charge, il faut une version de java compatible avec notre version de gatling et scala (Il existe des problèmes avec java 9 du coup:  utiliser java 1.8 pour lancer les tests de charges)
 
-### 5.2 Lancer les tests
+### 5.2 Lancer les tests (scenario + charge)
 
 - Lancer les services (./install.sh puis ./run.sh) 
 - Lancer ./tests.sh
