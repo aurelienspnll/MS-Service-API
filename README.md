@@ -12,7 +12,7 @@
 ## 2. Executer le programme
 
 ### 2.1 Vérifier que le logiciel docker est bien lancé
- - linux :  (service --status-all)
+ - linux :  service --status-all
  - mac : la baleine dans la barre des tâches
   
 si ce n'est pas le cas : 
@@ -144,7 +144,7 @@ L'objet JSON dans le body de la Requête pour supprimer une livraison:
 
 ## 4. Choix de conception pour les différents services
 
-### 4.1 Service Catalogue (review): 
+### 4.1 Service Catalogue: 
 
 Nous avons choisi d'utiliser le paradigme *Resource* comme interface du service de catalogue de repas.
 Le catalogue est une ressources qui contient des repas auquel on pourrai y accéder par une URL : 
@@ -218,7 +218,12 @@ nous permet d’avoir chaque service conteneurisé comme une boite noire.
     - docker rm $(docker ps -a -q)
     
     
+## Equipe
 
+- Mohamed Chennouf
+- Andreina Wilhelm
+- Aurélien Spinelli
+- Thibault Bondon
 
  
 
