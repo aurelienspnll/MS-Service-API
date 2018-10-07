@@ -145,7 +145,7 @@ L'objet JSON dans le body de la Requête pour supprimer une livraison:
 
 ## 4. Choix de conception pour les différents services
 
-### 4.1 Service Catalogue : 
+### 4.1 Service Catalogue (review): 
 
 Nous avons choisi d'utiliser le paradigme *Resource* comme interface du service de catalogue de repas.
 Le catalogue est une ressources qui contient des repas auquel on pourrai y accéder par une URL : 
