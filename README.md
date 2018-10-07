@@ -73,25 +73,24 @@ L'objet JSON dans le body de la Requête pour purger la base de données:
 
 La Requête pour ajouter des repas dans le catalogue :
 
-- Post   http://localhost:9090/catalogue-service-rest/meals
+- Post   http://localhost:9090/food-service-rest/foods
 - Body -> raw -> application/json
 
 L'objet JSON dans le body:
 ```json
 {
-  "name": "tarte aux pommes",
-  "description": "Tarte sucrée, faite d'une pâte feuilletée garnie de pommes émincées.",
-  "price": "3" 
+ "food":
+   {
+     "name": "tarte aux pommes",
+     "description": "Tarte sucrée, faite d'une pâte feuilletée garnie de pommes émincées.",
+     "price": 3.5
+   }
 }
 ```
 La Requête pour afficher le catalogue :
 
-- Get  http://localhost:9090/catalogue-service-rest/meals
+- Get  http://localhost:9090/food-service-rest/foods
 
-On peut filtrer les repas qui sont dans nos moyens en ajoutant le queryParam  maxPrice pour avoir tous les repas qui ont un prix <= à la valeur mise :
-
-Tous les repas <= 30 euros : 
-   - Get  http://localhost:9090/catalogue-service-rest/meals?maxPrice=30  
 
 ### 3.3 Service de livraison
 
