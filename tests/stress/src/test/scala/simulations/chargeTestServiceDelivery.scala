@@ -12,8 +12,10 @@ class chargeTestServiceDelivery extends Simulation {
 
   val httpConf =
     http
-      .baseURL("http://localhost:9100/delivery-service-document/delivery")
-  /*
+      .baseURL("http://localhost:9100/delivery-service-document/")
+      .acceptHeader("application/json")
+      .header("Content-Type", "application/json")
+
   val stressSample =
     scenario("Deliver")
       .repeat(10)
@@ -29,48 +31,45 @@ class chargeTestServiceDelivery extends Simulation {
           )
           .pause(1 seconds)
           .exec(
-            http("The restaurant consult ")
-              .post("ordersFood")
-              .body(StringBody(session => buildValidate(session)))
+            http("The restaurant consult the delivery")
+              .post("delivery")
+              .body(StringBody(session => buildConsult(session)))
               .check(status.is(200))
           )
           .pause(1 seconds)
           .exec(
-            http("Consult orders")
-              .post("ordersFood")
-              .body(StringBody(session => buildConsult(session)))
+            http("The delivery man has finished")
+              .post("delivery")
+              .body(StringBody(session => buildComplete(session)))
               .check(status.is(200))
           )
       }
 
-  def buildOrder(session: Session): String = {
+  def buildDelivery(session: Session): String = {
     val id = session("id").as[String]
     raw"""{
-      "event": "ORDER",
-      "orderFood": {
-        "id":"$id",
-        "nameOfFood":"Hot Wings 30 Bucket",
-        "nameOfClient":"Aurélien",
-        "addressDestination":"3 avenue promenade des anglais"
-      }
-    }""""
-  }
-
-  def buildValidate(session: Session): String = {
-    val id = session("id").as[String]
-    raw"""{
-      "event": "VALIDATE",
-      "id": "$id",
-      "validate": "false"
+         "event" : "DELIVER",
+         "delivery" : {
+            "id": "$id",
+            "idOrder": "34",
+            "deliveryMan": "Pablo",
+            "delivered": false
+         }
     }""""
   }
 
   def buildConsult(session: Session): String = {
-    raw"""{
-      "event": "CONSULT"
-    }""""
+    val id = session("id").as[String]
+    raw"""{"event": "CONSULT", "id":"$id"}""""
   }
 
+  def buildComplete(session: Session): String = {
+    val id = session("id").as[String]
+    raw"""{"event": "COMPLETE", "id":"$id"}""""
+  }
+
+
+
   setUp(stressSample.inject(rampUsers(20) over (10 seconds)).protocols(httpConf))
-  */
+
 }
