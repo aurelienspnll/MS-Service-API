@@ -1,5 +1,13 @@
 #!/bin/sh
 
-cd deployment
+cd tests
 
-docker-compose up -d
+mvn clean package
+
+cd stress
+
+mvn gatling:execute
+
+cd ../acceptation
+
+mvn integration-test
