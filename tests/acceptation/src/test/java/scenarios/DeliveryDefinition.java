@@ -15,7 +15,6 @@ public class DeliveryDefinition {
 
     private JSONObject delivery;
     private JSONObject answer;
-    private String identifiant;
 
     private JSONObject call(JSONObject request) {
         String raw =
@@ -26,7 +25,7 @@ public class DeliveryDefinition {
         return new JSONObject(raw);
     }
 
-    @Given("^an empty delivery catalogue deployed on (.*):(\\d+)$")
+    @Given("^an empty delivery deployed on (.*):(\\d+)$")
     public void initialize_port(String host, int port) {
         this.host = host;
         this.port = port;
@@ -34,7 +33,7 @@ public class DeliveryDefinition {
         assertTrue(ans.getBoolean("allDeleted"));
     }
 
-    @Given("^a delivery with id (.*) added to the registry$")
+    @Given("^a delivery with id (.*) added to the database")
     public void preregistered_delivery(String id) {
         JSONObject delivery = new JSONObject();
         delivery.put("id", id);
@@ -52,22 +51,8 @@ public class DeliveryDefinition {
         delivery.put("delivered", false);
     }
 
-    @Given("^A delivery identified as (.*)$")
-    public void initialize_a_order(String id){
-        delivery = new JSONObject();
-        delivery.put("id",id);
-        delivery.put("delivered", false);
-    }
-    @Given("^a delivery identified as (\\d+)$")
-    public void a_delivery_identified_as(int id) throws Throwable {
-        delivery = new JSONObject();
-        delivery.put("id",id);
-        delivery.put("delivered", false);
-    }
-
     @Given("^is assigned to (.*)$")
     public void add_deliveryMan(String deliveryMan) { delivery.put("deliveryMan", deliveryMan); }
-
 
     @Given("^id order is (\\d+)$")
     public void add_idOrder(String idOrder) { delivery.put("idOrder", idOrder); }
@@ -75,34 +60,10 @@ public class DeliveryDefinition {
     @When("^the (.*) action is run$")
     public void call_registry(String message) {
         JSONObject request = new JSONObject();
+        request.put("event", message);
         switch(message) {
             case "DELIVER":
-                request.put("event", message);
                 request.put("delivery", delivery);
-                break;
-            case "COMPLETE":
-                request.put("event", message);
-                request.put("id", identifiant);
-                break;
-            case "CONSULT":
-                request.put("event", message);
-                request.put("id", identifiant);
-                break;
-            case "LIST":
-                request.put("event", message);
-                break;
-            case "LISTCOMPLETED":
-                request.put("event", message);
-                break;
-            case "LISTNOTCOMPLETED":
-                request.put("event", message);
-                break;
-            case "DELETE":
-                request.put("event", message);
-                request.put("id", identifiant);
-                break;
-            case "CLEAN":
-                request.put("event", message);
                 break;
 
             default:
@@ -117,10 +78,13 @@ public class DeliveryDefinition {
         assertEquals(true,answer.getBoolean("inserted"));
     }
 
-    @Then("^the field (.*) has its value equals to (.*)$")
+    @Then("^field (.*) is equals to (.*)$")
     public void check_delivery_content(String key, String value) {
-        Object data = answer.getJSONObject("orderFood").get(key.trim());
-        assertEquals(value.trim(), data);
+        Object data = answer.getJSONObject("delivery").get(key.trim());
+        if(data.getClass().equals(Boolean.class)) {
+            assertEquals(Boolean.parseBoolean(value.trim()), data);
+        } else {
+            assertEquals(value.trim(), data);
+        }
     }
-
 }
