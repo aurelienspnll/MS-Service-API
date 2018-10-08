@@ -1,4 +1,4 @@
-package food;
+package resource;
 
 import com.mongodb.MongoClient;
 import org.jongo.Jongo;

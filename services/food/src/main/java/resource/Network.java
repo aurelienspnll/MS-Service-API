@@ -1,4 +1,4 @@
-package food;
+package resource;
 
 class Network {
     static final String HOST = "food-database";

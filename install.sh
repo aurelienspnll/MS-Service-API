@@ -19,5 +19,5 @@ build() { # $1: directory, $2: image_name
 echo "Building locals resources"
 
 build delivery uberoo/delivery-document
-build resource  uberoo/cataloguefood-rest
+build food  uberoo/food-rest
 build document  uberoo/ordersfood-document

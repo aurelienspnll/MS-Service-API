@@ -2,8 +2,8 @@ version: '3'
 
 services:
 
-
-  ordersfood:               # service orders, on port 9080
+  # Services for managing ORDER
+  ordersfood:                      # service orders, on port 9080
     container_name: ordersfood
     image: uberoo/ordersfood-document
     depends_on:
@@ -19,23 +19,33 @@ services:
     ports:
       - "27017:27017"
 
-  cataloguefood:            # service food, on port 9090
-    container_name: cataloguefood
-    image: uberoo/cataloguefood-rest
-    depends_on:
-          - database2
-    ports:
-      - "9090:8080"
 
-  database2:                       # MongoDB database : food, on port 27017
+  # Services for managing FOOD
+  foodService:                      # service resource, on port 9090
+    container_name: food
+    image: uberoo/food-rest
+    depends_on:
+    - foodDBService
+    ports:
+    - "9090:8080"
+
+  foodDBService:                   # MongoDB database : resource, on port 27017
     container_name: food-database
     image: mongo:3.0
     volumes:
-      - "./mongo_data2:/data/db"
+    - "./mongo_data2:/data/db"
     ports:
-      - "27019:27017"
+    - "27019:27017"
 
-  delivery:            # service delivery, on port 9100
+  food-db-init:                   # For preloading DB with some food items
+    build: ./db
+    links:
+    - foodDBService
+
+
+
+  # Services for managing DELIVERY
+  delivery:                        # service delivery, on port 9100
     container_name: delivery
     image: uberoo/delivery-document
     depends_on:
@@ -50,10 +60,3 @@ services:
       - "./mongo_data3:/data/db"
     ports:
       - "27021:27017"
-
-
-
-
-
-
-

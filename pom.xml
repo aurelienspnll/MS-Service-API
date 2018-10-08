@@ -22,6 +22,4 @@
         <module>services</module>
         <module>tests</module>
     </modules>
-
-
 </project>

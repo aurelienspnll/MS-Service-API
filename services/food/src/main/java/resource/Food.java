@@ -1,4 +1,4 @@
-package food;
+package resource;
 
 import org.jongo.marshall.jackson.oid.MongoObjectId;
 import org.json.JSONObject;

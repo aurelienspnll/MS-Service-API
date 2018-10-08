@@ -1,4 +1,4 @@
-package food;
+package resource;
 
 import org.json.JSONObject;
 import javax.ws.rs.*;
@@ -6,7 +6,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 
-import static food.Handler.*;
+import static resource.Handler.*;
 
 @Path("/foods")
 public class FoodService {

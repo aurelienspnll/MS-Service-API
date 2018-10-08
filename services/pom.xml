@@ -17,7 +17,7 @@
     </parent>
 
     <modules>
-        <module>resource</module>
+        <module>food</module>
         <module>document</module>
         <module>delivery</module>
     </modules>
@@ -55,7 +55,4 @@
             </plugin>
         </plugins>
     </build>
-
-
-
 </project>

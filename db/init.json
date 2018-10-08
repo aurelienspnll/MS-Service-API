@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Esprit Maki",
+    "description": "Assortiment de 12 pièces",
+    "price": 12.50
+  },
+  {
+    "name": "Esprit Nigiri",
+    "description": "Assortiment de 12 pièces",
+    "price": 18.50
+  },
+  {
+    "name": "Esprit Mixte",
+    "description": "Assortiment de 6 Nigiri + 6 Maki + 2 Yakitori",
+    "price": 16.50
+  },
+  {
+    "name": "Esprit Roll",
+    "description": "Assortiment de 6 Spring Roll + 6 Egg Roll",
+    "price": 18.00
+  },
+  {
+    "name": "Mousse au Chocolat",
+    "description": "Avec du sauce de framboise",
+    "price": 5.20
+  }
+]
