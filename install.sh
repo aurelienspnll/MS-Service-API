@@ -20,4 +20,4 @@ echo "Building locals resources"
 
 build delivery uberoo/delivery-document
 build food  uberoo/food-rest
-build document  uberoo/ordersfood-document
+build order  uberoo/ordersfood-document

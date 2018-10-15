@@ -18,7 +18,7 @@
 
     <modules>
         <module>food</module>
-        <module>document</module>
+        <module>order</module>
         <module>delivery</module>
     </modules>
 
