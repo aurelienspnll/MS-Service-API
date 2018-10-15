@@ -1,4 +1,4 @@
-.idea/libraries/*.xml
+.idea/*
 !pom.xml
 *.iml
 *.jar
@@ -6,3 +6,6 @@ tests/stress/src/test/results/*
 tests/stress/target/*
 tests/acceptation/src/test/results/*
 tests/acceptation/target/*
+services/delivery/target/*
+services/food/target/*
+services/order/target/*
