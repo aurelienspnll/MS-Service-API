@@ -2,3 +2,7 @@
 !pom.xml
 *.iml
 *.jar
+tests/stress/src/test/results/*
+tests/stress/target/*
+tests/acceptation/src/test/results/*
+tests/acceptation/target/*
