@@ -9,3 +9,4 @@ tests/acceptation/target/*
 services/delivery/target/*
 services/food/target/*
 services/order/target/*
+services/eta/target/*

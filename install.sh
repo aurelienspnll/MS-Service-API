@@ -21,4 +21,4 @@ echo "Building locals resources"
 build delivery uberoo/delivery-document
 build food  uberoo/food-rest
 build order  uberoo/ordersfood-document
-build ETA uberoo/eta-rpc
+build eta uberoo/eta-rpc
