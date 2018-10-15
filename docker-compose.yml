@@ -2,11 +2,11 @@ version: '3'
 
 services:
 
-  eta-computation:                # ETA Computation, on port 9080
+  eta-computation:                # ETA Computation, on port 9070
     container_name: eta-computation
     image: uberoo/eta-rpc
     ports:
-      - "9080:8080"
+      - "9070:8080"
 
   # Services for managing ORDER
   ordersfood:                      # service orders, on port 9080
