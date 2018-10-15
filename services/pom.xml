@@ -20,6 +20,7 @@
         <module>food</module>
         <module>order</module>
         <module>delivery</module>
+        <module>eta</module>
     </modules>
 
     <properties>
