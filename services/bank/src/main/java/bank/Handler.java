@@ -20,15 +20,15 @@ class Handler {
 
     static JSONObject validate(JSONObject input)
     {
-        MongoCollection orders = getPayements();
+        MongoCollection payements = getPayements();
         String id = input.getString("id");
         Boolean validate = input.getBoolean("validate");
         if(validate) {
-            orders.update("{id:#}", id).with("{$set: {'status': 'SUCCESSFUL'}}");
+            payements.update("{id:#}", id).with("{$set: {'status': 'SUCCESSFUL'}}");
         }else {
-            orders.update("{id:#}", id).with("{$set: {'status': 'NOT SUCCESSFUL'}}");
+            payements.update("{id:#}", id).with("{$set: {'status': 'NOT SUCCESSFUL'}}");
         }
-        payement mypayement = orders.findOne("{id:#}",id).as(payement.class);
+        payement mypayement = payements.findOne("{id:#}",id).as(payement.class);
         return new JSONObject().put("approved", validate).put("payement", mypayement.toJson());
     }
 
