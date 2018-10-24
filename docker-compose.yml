@@ -91,3 +91,20 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: "zk:2181"
     healthcheck:
       test: "kafka-topics.sh --zookeeper zookeeper:2181 --list 2>&1 | grep \"topic\""
+
+  # Services bank
+  bank:                      # service orders, on port 9080
+    container_name: bank
+    image: uberoo/bank-document
+    depends_on:
+      - databasebank
+    ports:
+      - "9120:8080"
+
+  databasebank:                       # MongoDB database : orders, on port 27017
+    container_name: bank-database
+    image: mongo:3.0
+    volumes:
+      - "./mongo_databank:/data/db"
+    ports:
+      - "27030:27017"

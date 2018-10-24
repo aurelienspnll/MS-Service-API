@@ -3,33 +3,21 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>eta</artifactId>
+
+    <groupId>uberoo</groupId>
+    <artifactId>bank</artifactId>
+
     <packaging>war</packaging>
     <version>1.0</version>
-    <name>Service Resource</name>
+    <name>Service Document</name>
 
     <parent>
         <groupId>uberoo</groupId>
         <artifactId>services</artifactId>
         <version>1.0</version>
     </parent>
-
+    
     <dependencies>
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20170516</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
-            <version>2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>1.8.3</version>
-        </dependency>
         <dependency>
             <groupId>org.jongo</groupId>
             <artifactId>jongo</artifactId>
@@ -40,9 +28,15 @@
             <artifactId>mongo-java-driver</artifactId>
             <version>3.5.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20170516</version>
+        </dependency>
     </dependencies>
-
+    
     <build>
-        <finalName>eta-service-rpc</finalName>
+        <finalName>bank-service-document</finalName>
     </build>
+    
 </project>

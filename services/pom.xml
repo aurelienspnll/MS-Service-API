@@ -22,6 +22,7 @@
         <module>delivery</module>
         <module>eta</module>
         <module>around</module>
+        <module>bank</module>
     </modules>
 
     <properties>
