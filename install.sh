@@ -22,3 +22,4 @@ build delivery uberoo/delivery-document
 build food  uberoo/food-rest
 build order  uberoo/ordersfood-document
 build eta uberoo/eta-rpc
+build around uberoo/around-rpc

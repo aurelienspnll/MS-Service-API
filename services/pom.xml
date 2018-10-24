@@ -21,6 +21,7 @@
         <module>order</module>
         <module>delivery</module>
         <module>eta</module>
+        <module>around</module>
     </modules>
 
     <properties>
