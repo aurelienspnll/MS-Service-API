@@ -28,7 +28,7 @@ services:
     container_name: orders-database
     image: mongo:3.0
     volumes:
-      - "./mongo_data1:/data/db"
+      - "./db/mongo_data1:/data/db"
     ports:
       - "27017:27017"
 
@@ -46,7 +46,7 @@ services:
     container_name: food-database
     image: mongo:3.0
     volumes:
-    - "./mongo_data2:/data/db"
+    - "./db/mongo_data2:/data/db"
     ports:
     - "27019:27017"
 
@@ -70,7 +70,7 @@ services:
     container_name: delivery-database
     image: mongo:3.0
     volumes:
-      - "./mongo_data3:/data/db"
+      - "./db/mongo_data3:/data/db"
     ports:
       - "27021:27017"
 
@@ -105,6 +105,6 @@ services:
     container_name: bank-database
     image: mongo:3.0
     volumes:
-      - "./mongo_databank:/data/db"
+      - "./db/mongo_databank:/data/db"
     ports:
       - "27030:27017"

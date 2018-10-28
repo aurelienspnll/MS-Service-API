@@ -2,26 +2,43 @@
   {
     "name": "Esprit Maki",
     "description": "Assortiment de 12 pièces",
+    "category": "japonais",
     "price": 12.50
   },
   {
     "name": "Esprit Nigiri",
     "description": "Assortiment de 12 pièces",
+    "category": "japonais",
     "price": 18.50
   },
   {
     "name": "Esprit Mixte",
     "description": "Assortiment de 6 Nigiri + 6 Maki + 2 Yakitori",
+    "category": "japonais",
     "price": 16.50
   },
   {
     "name": "Esprit Roll",
     "description": "Assortiment de 6 Spring Roll + 6 Egg Roll",
+    "category": "japonais",
     "price": 18.00
   },
   {
     "name": "Mousse au Chocolat",
     "description": "Avec du sauce de framboise",
+    "category": "dessert",
     "price": 5.20
+  },
+  {
+    "name": "Burrito",
+    "description": "Poulet ou viande. Avec delicieux guacamole",
+    "category": "mexican",
+    "price": 7.20
+  },
+  {
+    "name": "Tacos",
+    "description": "Poulet ou viande. Avec delicieux guacamole",
+    "category": "mexican",
+    "price": 8.40
   }
 ]
