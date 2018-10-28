@@ -2,13 +2,19 @@ package orderfood;
 import com.mongodb.MongoClient;
 import java.util.ArrayList;
 import java.util.List;
+
+import messageKafka.messageProducer;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.jongo.MongoCursor;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 class Handler {
+
+    @Autowired
+    private static messageProducer producer;
 
     static JSONObject order(JSONObject input) {
         MongoCollection orders = getOrders();
@@ -28,6 +34,7 @@ class Handler {
             orders.update("{id:#}", id).with("{$set: {'status': 'NOT VALIDATED'}}");
         }
         OrderFood myOrder = orders.findOne("{id:#}",id).as(OrderFood.class);
+        producer.sendMessage("order",myOrder.toString());
         return new JSONObject().put("approved", validate).put("orderFood", myOrder.toJson());
     }
 

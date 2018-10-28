@@ -52,4 +52,9 @@ public class OrderFood {
                 .put("status", status);
     }
 
+    @Override
+    public String toString(){
+        return "id: "+id+", nameOfFood: "+nameOfFood+", nameOfClient: "+nameOfClient+", addressDestination: "+addressDestination+", deliveryTime: "+deliveryTime+", status"+status;
+    }
+
 }
