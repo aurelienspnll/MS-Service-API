@@ -23,6 +23,11 @@ services:
       - database1
     ports:
       - "9080:8080"
+    links:
+      - kafka
+      - database1
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
 
   database1:                       # MongoDB database : orders, on port 27017
     container_name: orders-database
@@ -87,7 +92,7 @@ services:
     environment:
       KAFKA_ADVERTISED_HOST_NAME: "kafka"
       KAFKA_ADVERTISED_PORT: "9092"
-      KAFKA_CREATE_TOPICS: "topic:1:1"
+      KAFKA_CREATE_TOPICS: "order:1:1,bank:1:1,delivery:1:1"
       KAFKA_ZOOKEEPER_CONNECT: "zk:2181"
     healthcheck:
       test: "kafka-topics.sh --zookeeper zookeeper:2181 --list 2>&1 | grep \"topic\""

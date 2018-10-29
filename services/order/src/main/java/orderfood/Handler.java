@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 class Handler {
 
     @Autowired
-    private static messageProducer producer;
+    private static messageProducer producer = new messageProducer();
 
     static JSONObject order(JSONObject input) {
         MongoCollection orders = getOrders();
@@ -34,7 +34,7 @@ class Handler {
             orders.update("{id:#}", id).with("{$set: {'status': 'NOT VALIDATED'}}");
         }
         OrderFood myOrder = orders.findOne("{id:#}",id).as(OrderFood.class);
-        producer.sendMessage("order",myOrder.toString());
+        producer.sendMessage("mddddrrmomo");//myOrder.toString());
         return new JSONObject().put("approved", validate).put("orderFood", myOrder.toJson());
     }
 

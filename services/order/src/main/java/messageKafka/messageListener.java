@@ -3,13 +3,9 @@ package messageKafka;
 import org.springframework.kafka.annotation.KafkaListener;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.logging.Logger;
 
 
-/**
- * Class messageListener
- *
- * @author Joël CANCELA VAZ
- */
 public class messageListener {
 
 	private CountDownLatch latch = new CountDownLatch(3);
