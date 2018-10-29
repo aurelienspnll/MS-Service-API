@@ -10,11 +10,13 @@ public class Food
 
     private String name;
     private String description;
+    private String category;
     private double price;
 
     public Food(JSONObject data) {
         this.name = data.getString("name");
         this.description = data.getString("description");
+        this.category = data.getString("category");
         this.price = data.getDouble("price");
     }
 
@@ -25,6 +27,7 @@ public class Food
                 .put("id", _id)
                 .put("name", name)
                 .put("description", description)
+                .put("category", category)
                 .put("price", price);
     }
 }
