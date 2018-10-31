@@ -10,3 +10,6 @@ services/delivery/target/*
 services/food/target/*
 services/order/target/*
 services/eta/target/*
+db/mondo_data1/*
+db/mondo_data2/*
+db/mondo_data3/*
