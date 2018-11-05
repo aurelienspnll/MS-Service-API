@@ -6,8 +6,6 @@ import org.springframework.kafka.core.KafkaTemplate;
 
 /**
  * Class messageProducer
- *
- * @author Joël CANCELA VAZ
  */
 public class messageProducer {
 

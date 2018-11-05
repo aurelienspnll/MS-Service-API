@@ -1,6 +1,7 @@
 package document;
 
 import com.mongodb.MongoClient;
+import document.models.Delivery;
 import org.bson.types.ObjectId;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
@@ -40,7 +41,7 @@ public class Handler {
         return new JSONObject().put("consult", theOne.toJson());
     }
 
-    static JSONObject list(JSONObject input) {
+    static JSONObject list() {
         MongoCursor<Delivery> cursor = deliveries.find().as(Delivery.class);
         List array = new ArrayList();
         while(cursor.hasNext()) {
@@ -49,7 +50,7 @@ public class Handler {
         return new JSONObject().put("deliveries", array);
     }
 
-    static JSONObject listCompleted(JSONObject input) {
+    static JSONObject listCompleted() {
         MongoCursor<Delivery> cursor = deliveries.find("{delivered:true}").as(Delivery.class);
         List array = new ArrayList();
         while(cursor.hasNext()) {
@@ -58,7 +59,7 @@ public class Handler {
         return new JSONObject().put("deliveries", array);
     }
 
-    static JSONObject listNotCompleted(JSONObject input) {
+    static JSONObject listNotCompleted() {
         MongoCursor<Delivery> cursor = deliveries.find("{delivered:false}").as(Delivery.class);
         List array = new ArrayList();
         while(cursor.hasNext()) {
@@ -73,7 +74,7 @@ public class Handler {
         if (null == theOne) {
             return new JSONObject().put("deleted", false);
         }
-        deliveries.remove(new ObjectId(theOne._id));
+        deliveries.remove(new ObjectId(theOne.get_id()));
         return new JSONObject().put("deleted", true);
     }
 

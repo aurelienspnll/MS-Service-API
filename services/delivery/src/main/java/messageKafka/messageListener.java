@@ -7,8 +7,6 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * Class messageListener
- *
- * @author Joël CANCELA VAZ
  */
 public class messageListener {
 

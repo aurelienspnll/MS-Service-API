@@ -29,11 +29,11 @@ public class Assignation {
                 case CONSULT:
                     return Response.ok().entity(consult(obj).toString(INDENT_FACTOR)).build();
                 case LIST:
-                    return Response.ok().entity(list(obj).toString(INDENT_FACTOR)).build();
+                    return Response.ok().entity(list().toString(INDENT_FACTOR)).build();
                 case LISTCOMPLETED:
-                    return Response.ok().entity(listCompleted(obj).toString(INDENT_FACTOR)).build();
+                    return Response.ok().entity(listCompleted().toString(INDENT_FACTOR)).build();
                 case LISTNOTCOMPLETED:
-                    return Response.ok().entity(listNotCompleted(obj).toString(INDENT_FACTOR)).build();
+                    return Response.ok().entity(listNotCompleted().toString(INDENT_FACTOR)).build();
                 case DELETE:
                     return Response.ok().entity(delete(obj).toString(INDENT_FACTOR)).build();
                 case CLEAN:
