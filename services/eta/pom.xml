@@ -6,7 +6,7 @@
     <artifactId>eta</artifactId>
     <packaging>war</packaging>
     <version>1.0</version>
-    <name>Service Resource</name>
+    <name>Uberoo :: Service ETA :: Resource</name>
 
     <parent>
         <groupId>uberoo</groupId>

@@ -7,7 +7,7 @@
     <artifactId>food</artifactId>
     <packaging>war</packaging>
     <version>1.0</version>
-    <name>Service Resource</name>
+    <name>Uberoo :: Service Food :: Resource</name>
 
     <parent>
         <groupId>uberoo</groupId>

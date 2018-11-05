@@ -1,8 +1,5 @@
 package document;
 
-import java.util.Properties;
-import java.io.IOException;
-
 public class Network {
 
     /*

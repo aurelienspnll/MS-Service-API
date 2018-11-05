@@ -9,7 +9,7 @@
 
     <packaging>war</packaging>
     <version>1.0</version>
-    <name>Service Document</name>
+    <name>Uberoo :: Service Bank :: Document</name>
 
     <parent>
         <groupId>uberoo</groupId>

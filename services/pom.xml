@@ -23,6 +23,7 @@
         <module>eta</module>
         <module>around</module>
         <module>bank</module>
+        <module>feedback</module>
     </modules>
 
     <properties>
