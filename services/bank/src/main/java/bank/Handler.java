@@ -10,42 +10,39 @@ import org.json.JSONObject;
 
 
 class Handler {
+    static MongoCollection payments = getPayments();
 
-    static JSONObject addpayement(JSONObject input) {
-        MongoCollection payements = getPayements();
-        payement data = new payement(input.getJSONObject("payement"));
-        payements.insert(data);
-        return new JSONObject().put("inserted", true).put("payement",data.toJson());
+
+    static JSONObject addPayment(JSONObject input) {
+        Payment data = new Payment(input.getJSONObject("payment"));
+        payments.insert(data);
+        return new JSONObject().put("inserted", true).put("payment",data.toJson());
     }
 
     static JSONObject validate(JSONObject input)
     {
-        MongoCollection payements = getPayements();
         String id = input.getString("id");
         Boolean validate = input.getBoolean("validate");
         if(validate) {
-            payements.update("{id:#}", id).with("{$set: {'status': 'SUCCESSFUL'}}");
+            payments.update("{id:#}", id).with("{$set: {'status': 'SUCCESSFUL'}}");
         }else {
-            payements.update("{id:#}", id).with("{$set: {'status': 'NOT SUCCESSFUL'}}");
+            payments.update("{id:#}", id).with("{$set: {'status': 'NOT SUCCESSFUL'}}");
         }
-        payement mypayement = payements.findOne("{id:#}",id).as(payement.class);
-        return new JSONObject().put("approved", validate).put("payement", mypayement.toJson());
+        Payment myPayment = payments.findOne("{id:#}",id).as(Payment.class);
+        return new JSONObject().put("approved", validate).put("payment", myPayment.toJson());
     }
 
     static JSONObject consult(JSONObject input) {
-        MongoCollection payements = getPayements();
-        MongoCursor<payement> cursor = payements.find().as(payement.class);
+        MongoCursor<Payment> cursor = payments.find().as(Payment.class);
         List array = new ArrayList();
         while(cursor.hasNext()) {
             array.add(cursor.next().toJson());
         }
-        return new JSONObject().put("payements", array);
+        return new JSONObject().put("payments", array);
     }
 
-
-    
-    private static MongoCollection getPayements() {
-        MongoClient client = new MongoClient("bank-database", 27017);
-        return new Jongo(client.getDB("bank")).getCollection("payementService");
+    private static MongoCollection getPayments() {
+        MongoClient client = new MongoClient(Network.HOST, Network.PORT);
+        return new Jongo(client.getDB(Network.DATABASE)).getCollection(Network.COLLECTION);
     }
 }

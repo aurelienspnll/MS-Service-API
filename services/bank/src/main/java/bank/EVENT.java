@@ -2,5 +2,5 @@ package bank;
 
 
 public enum EVENT {
-    ADDPAYEMENT, VALIDATE, CONSULT
+    ADDPAYMENT, VALIDATE, CONSULT
 }

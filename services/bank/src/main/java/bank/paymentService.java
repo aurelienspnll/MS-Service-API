@@ -9,9 +9,9 @@ import javax.ws.rs.core.Response;
 import org.json.JSONObject;
 import static bank.Handler.*;
 
-@Path("/ordersFood")
+@Path("/payment")
 @Produces(MediaType.APPLICATION_JSON)
-public class payementService {
+public class paymentService {
 
     private static final int INDENT_FACTOR = 1;
 
@@ -21,8 +21,8 @@ public class payementService {
         JSONObject obj = new JSONObject(input);
         try {
             switch (EVENT.valueOf(obj.getString("event"))) {
-                case ADDPAYEMENT:
-                    return Response.ok().entity(addpayement(obj).toString(INDENT_FACTOR)).build();
+                case ADDPAYMENT:
+                    return Response.ok().entity(addPayment(obj).toString(INDENT_FACTOR)).build();
                 case VALIDATE:
                     return Response.ok().entity(validate(obj).toString(INDENT_FACTOR)).build();
                 case CONSULT:

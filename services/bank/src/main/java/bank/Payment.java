@@ -3,7 +3,7 @@ package bank;
 import org.jongo.marshall.jackson.oid.MongoObjectId;
 import org.json.JSONObject;
 
-public class payement {
+public class Payment {
 
     private Double price;
     private String status;
@@ -12,12 +12,12 @@ public class payement {
     @MongoObjectId
     String _id;
 
-    public payement(JSONObject data) {
+    public Payment(JSONObject data) {
         this.price = data.getDouble("price");
         this.status = "Processing";
     }
 
-    public payement() {} // ne pas enlever, c'est pour instancier la class avec findOne(...payement.class)
+    public Payment() {} // ne pas enlever, c'est pour instancier la class avec findOne(...payement.class)
 
 
 
