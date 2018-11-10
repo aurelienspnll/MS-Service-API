@@ -6,10 +6,9 @@ import org.json.JSONObject;
 public class Delivery {
 
     private String id;
-    private String idOrder;
-    private String deliveryMan;
+    private Order order;
+    private DeliveryMan deliveryMan;
     private Boolean delivered;
-
 
     @MongoObjectId
     private
@@ -17,19 +16,18 @@ public class Delivery {
 
     public Delivery(JSONObject data) {
         this.setId(data.getString("id"));
-        this.setIdOrder(data.getString(("idOrder")));
-        this.setDeliveryMan(data.getString("deliveryMan"));
+        this.setOrder(new Order(data.getJSONObject("order")));
+        this.setDeliveryMan(new DeliveryMan(data.getJSONObject("deliveryMan")));
         this.setDelivered(data.getBoolean("delivered"));
     }
 
-    public Delivery() {} // ne pas enlever, c'est pour instancier la class avec findOne(...OrderFood.class)
-
+    public Delivery() {}
 
     public JSONObject toJson() {
         return new JSONObject()
                 .put("id", getId())
-                .put("idOrder", getIdOrder())
-                .put("deliveryMan", getDeliveryMan())
+                .put("idOrder", getOrder().toJson())
+                .put("deliveryMan", getDeliveryMan().toJson())
                 .put("delivered", getDelivered());
     }
 
@@ -41,19 +39,19 @@ public class Delivery {
         this.id = id;
     }
 
-    public String getIdOrder() {
-        return idOrder;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setIdOrder(String idOrder) {
-        this.idOrder = idOrder;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
-    public String getDeliveryMan() {
+    public DeliveryMan getDeliveryMan() {
         return deliveryMan;
     }
 
-    public void setDeliveryMan(String deliveryMan) {
+    public void setDeliveryMan(DeliveryMan deliveryMan) {
         this.deliveryMan = deliveryMan;
     }
 

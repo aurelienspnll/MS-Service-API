@@ -87,33 +87,14 @@ public class Handler {
         return new JSONObject().put("allDeleted", true);
     }
 
+
     /**
      * In the future, this method can estimate how much time is left for the delivery man to arrive
      * @param input id of the delivery man
      * @return random geographic position
      */
+    /* VERSION 1 : TRACKING
     static JSONObject tracking(JSONObject input){
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        String currentTime = sdf.format(cal.getTime());
-        Random rand = new Random();
-        int lat = rand.nextInt(180); //latitude
-        int lon = rand.nextInt(180); //longitude
-        JSONObject answer = new JSONObject();
-        answer.put("realTime", currentTime);
-        answer.put("latitude", lat);
-        answer.put("longitude", lon);
-        return new JSONObject().put("tracking", answer);
-    }
-
-    /*
-    //TODO
-    static JSONObject trackingByIdDelivery(JSONObject input){
-        String id = input.getString("id");
-        Delivery theOne = deliveries.findOne("{id:#}",id).as(Delivery.class);
-        if (null == theOne) {
-            return new JSONObject().put("tracking", "Delivery not found");
-        }
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         String currentTime = sdf.format(cal.getTime());
@@ -128,6 +109,31 @@ public class Handler {
     }
     */
 
+    /**
+     * Method to track a delivery
+     * In the future, this method can estimate how much time is left for the delivery man to arrive
+     * @param input id of delivery
+     * @return random geographic position
+     */
+    static JSONObject tracking(JSONObject input){
+        String id = input.getString("id");
+        Delivery theOne = deliveries.findOne("{id:#}",id).as(Delivery.class);
+        if (null == theOne) {
+            return new JSONObject().put("tracking", "Delivery not found");
+        }
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        String currentTime = sdf.format(cal.getTime());
+        Random rand = new Random();
+        int lat = rand.nextInt(180); //latitude
+        int lon = rand.nextInt(180); //longitude
+        JSONObject answer = new JSONObject();
+        answer.put("coursier", theOne.getDeliveryMan().getFirstName());
+        answer.put("realTime", currentTime);
+        answer.put("latitude", lat);
+        answer.put("longitude", lon);
+        return new JSONObject().put("tracking", answer);
+    }
     private static MongoCollection getDeliveries() {
         MongoClient client = new MongoClient(Network.HOST, Network.PORT);
         return new Jongo(client.getDB(Network.DATABASE)).getCollection(Network.COLLECTION);
