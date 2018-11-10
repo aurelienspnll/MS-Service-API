@@ -24,3 +24,4 @@ build order  uberoo/ordersfood-document
 build eta uberoo/eta-rpc
 build around uberoo/around-rpc
 build bank uberoo/bank-document
+build feedback uberoo/feedback-document

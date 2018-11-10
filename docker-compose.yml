@@ -8,7 +8,7 @@ services:
     ports:
       - "9070:8080"
 
-  around:                # ETA Computation, on port 9070
+  around:
       container_name: around
       image: uberoo/around-rpc
       ports:
@@ -98,7 +98,7 @@ services:
       test: "kafka-topics.sh --zookeeper zookeeper:2181 --list 2>&1 | grep \"topic\""
 
   # Services bank
-  bank:                      # service orders, on port 9080
+  bank:
     container_name: bank
     image: uberoo/bank-document
     depends_on:
@@ -113,3 +113,19 @@ services:
       - "./db/mongo_databank:/data/db"
     ports:
       - "27030:27017"
+
+  feedback:                        # service feedback, on port 9130
+    container_name: feedback
+    image: uberoo/feedback-document
+    depends_on:
+      - feedback-database
+    ports:
+      - "9130:8080"
+
+  feedback-database:                       # MongoDB database : on port 27023
+    container_name: feedback-database
+    image: mongo:3.0
+    volumes:
+      - "./db/mongo_feedbackdata:/data/db"
+    ports:
+      - "27023:27017"
