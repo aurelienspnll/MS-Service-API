@@ -38,6 +38,8 @@ public class Assignation {
                     return Response.ok().entity(delete(obj).toString(INDENT_FACTOR)).build();
                 case CLEAN:
                     return Response.ok().entity(deleteAll().toString(INDENT_FACTOR)).build();
+                case TRACK:
+                    return Response.ok().entity(tracking(obj).toString(INDENT_FACTOR)).build();
             }
         }catch(Exception e) {
             JSONObject error = new JSONObject().put("error", e.toString());

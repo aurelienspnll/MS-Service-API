@@ -10,6 +10,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Random;
 
 public class Handler {
 
@@ -18,6 +21,7 @@ public class Handler {
 
     static JSONObject deliver(JSONObject input) {
         Delivery data = new Delivery(input.getJSONObject("delivery"));
+
         deliveries.insert(data);
         return new JSONObject().put("inserted", true).put("delivery",data.toJson());
     }
@@ -82,6 +86,47 @@ public class Handler {
         deliveries.drop();
         return new JSONObject().put("allDeleted", true);
     }
+
+    /**
+     * In the future, this method can estimate how much time is left for the delivery man to arrive
+     * @param input id of the delivery man
+     * @return random geographic position
+     */
+    static JSONObject tracking(JSONObject input){
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        String currentTime = sdf.format(cal.getTime());
+        Random rand = new Random();
+        int lat = rand.nextInt(180); //latitude
+        int lon = rand.nextInt(180); //longitude
+        JSONObject answer = new JSONObject();
+        answer.put("realTime", currentTime);
+        answer.put("latitude", lat);
+        answer.put("longitude", lon);
+        return new JSONObject().put("tracking", answer);
+    }
+
+    /*
+    //TODO
+    static JSONObject trackingByIdDelivery(JSONObject input){
+        String id = input.getString("id");
+        Delivery theOne = deliveries.findOne("{id:#}",id).as(Delivery.class);
+        if (null == theOne) {
+            return new JSONObject().put("tracking", "Delivery not found");
+        }
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        String currentTime = sdf.format(cal.getTime());
+        Random rand = new Random();
+        int lat = rand.nextInt(180); //latitude
+        int lon = rand.nextInt(180); //longitude
+        JSONObject answer = new JSONObject();
+        answer.put("realTime", currentTime);
+        answer.put("latitude", lat);
+        answer.put("longitude", lon);
+        return new JSONObject().put("tracking", answer);
+    }
+    */
 
     private static MongoCollection getDeliveries() {
         MongoClient client = new MongoClient(Network.HOST, Network.PORT);
