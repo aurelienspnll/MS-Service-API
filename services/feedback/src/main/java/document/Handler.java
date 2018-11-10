@@ -16,15 +16,26 @@ public class Handler {
     private static MongoCollection feedbacks = getFeedbacks();
 
     static JSONObject feedback(JSONObject input) {
-        //TODO : creation d'un feedback
-        return new JSONObject();
+        Feedback data = new Feedback(input.getJSONObject("feedback"));
+        feedbacks.insert(data);
+        return new JSONObject().put("inserted", true).put("feedback",data.toJson());
     }
 
+    /**
+     * @param input idFood to consult
+     * @return list of all feedback about the food
+     */
     static JSONObject consult(JSONObject input) {
-        /*
-        TODO : Le consult devra non pas consulter un avis par rapport à son id, mais tous les avis pour un
-        TODO : idFood -> permet de savoir tous les avis d'un plat */
-        return new JSONObject();
+        String id = input.getString("id");
+        MongoCursor<Feedback> cursor = feedbacks.find().as(Feedback.class);
+        List array = new ArrayList();
+        while(cursor.hasNext()) {
+            Feedback tmp = cursor.next();
+            if(tmp.getFood().getId().equals(id)) {
+                array.add(tmp.toJson());
+            }
+        }
+        return new JSONObject().put("feedbacks", array);
     }
 
     static JSONObject list() {

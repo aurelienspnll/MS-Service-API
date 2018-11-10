@@ -13,7 +13,10 @@ public class Feedback {
     @MongoObjectId
     private String _id;
 
-    public Feedback(JSONObject data) {
+    public Feedback(JSONObject feedback) {
+        this.client = new Client(feedback.getJSONObject("client"));
+        this.food = new Food(feedback.getJSONObject("food"));
+        this.view = feedback.getString("view");
     }
 
     public Feedback() {}

@@ -1,17 +1,15 @@
 package document.models;
 
-import org.jongo.marshall.jackson.oid.MongoObjectId;
 import org.json.JSONObject;
 
 public class Food {
 
-    @MongoObjectId
-    String _id;
-
+    private String id;
     private String name;
     private String category;
 
     public Food(JSONObject data) {
+        this.setId(data.getString("id"));
         this.name = data.getString("name");
         this.category = data.getString("category");
     }
@@ -20,9 +18,16 @@ public class Food {
 
     JSONObject toJson() {
         return new JSONObject()
-                .put("id", _id)
+                .put("id", getId())
                 .put("name", name)
                 .put("category", category);
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }
