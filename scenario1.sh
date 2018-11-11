@@ -71,20 +71,6 @@ curl -X POST -H "Content-Type: application/json" -d "{\"event\": \"VALIDATE\", \
 
 echo ""
 echo ""
-echo "Un event kafka est envoyé chez Delivery"
-
-curl -X POST -H "Content-Type: application/json" -d "{
-  \"event\" : \"DELIVER\",
-  \"delivery\" : {
-    \"deliveryMan\": \"Gail\",
-    \"delivered\": \"false\",
-    \"id\": \"33\",
-    \"idOrder\": \"2\"
-    }
-}" http://localhost:9100/delivery-service-document/delivery
-
-echo ""
-echo ""
 echo "Un event kafka est envoyé chez Bank"
 
 curl -X POST -H "Content-Type: application/json" -d "{
@@ -111,4 +97,83 @@ echo ""
 echo "Jordan le chef du restaurant consulte ces commandes"
 echo "Press any key to continue..."
 read
+curl -X POST -H "Content-Type: application/json" -d "{
+  \"event\": \"CONSULT\"
+}" http://localhost:9080/order-service-document/ordersFood
+
+echo ""
+echo ""
+echo "Jordan Prépare le plat et ajoute au service Delevery"
+echo "Press any key to continue..."
+read
+
+
+
+curl -X POST -H "Content-Type: application/json" -d "{\"event\" : \"DELIVER\",
+         \"delivery\" : {
+            \"id\": \"12\",
+            \"order\": {
+            	\"idOrder\" : \"2\",
+            	\"idClient\" : \"65\",
+            	\"clientName\" : \"Gail\",
+            	\"address\" : \"Rue de Medeline\"
+
+            },
+            \"deliveryMan\": {
+            	\"idDeliveryMan\" : \"2\",
+            	\"firstName\": \"Tomas\",
+            	\"lastName\" : \"Escobar\"
+            },
+            \"delivered\": false
+         }
+}" http://localhost:9100/delivery-service-document/delivery
+
+echo ""
+echo ""
+echo "Jormie est coursier est souhaite consulter les commandes non livré"
+echo "Press any key to continue..."
+read
+
+curl -X POST -H "Content-Type: application/json" -d {"event": "LISTNOTCOMPLETED"} http://localhost:9100/delivery-service-document/delivery
+
+
+echo ""
+echo ""
+echo "Jormie veut maintenant consulter les pret de sa position"
+echo "Press any key to continue..."
+read
+
+curl -X POST -H "Content-Type: application/json" -d "{\"deliveries\": [
+{\"id\":2, posX:22, posY:122, posrX:122, posrY:23},
+{\"id\":2, posX:42, posY:152, posrX:12, posrY:13},
+{\"id\":2, posX:2, posY:52, posrX:2, posrY:13}
+] }" http://localhost:9110/around-service-rpc/CalculateKilometre
+
+echo ""
+echo ""
+echo "Jormie prend une commande et la fait"
+echo "Press any key to continue..."
+read
+
+curl -X POST -H "Content-Type: application/json" -d "{\"event\": \"COMPLETE\", \"id\":\"6\"}" http://localhost:9100/delivery-service-document/delivery
+
+echo ""
+echo ""
+echo "Un event kafka est envoyé à la Bank"
+
+curl -X POST -H "Content-Type: application/json" -d "{
+  \"event\" : \"ADDPAYMENT\",
+  \"payment\" : {
+    \"price\": \"20\",
+    \"id\": \"Jamie\"
+    \"type\": \"virement\"
+    }
+}" http://localhost:9120/bank-service-document/payment
+
+echo ""
+echo ""
+echo "Jamie est payé"
+echo "Gail a recu sa commande"
+
+
 
