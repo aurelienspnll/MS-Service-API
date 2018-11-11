@@ -6,10 +6,10 @@ import org.json.JSONObject;
 public class Delivery {
 
     private String id;
-    private String idOrder;
-    private String deliveryMan;
+    private Order order;
+    private DeliveryMan deliveryMan;
     private Boolean delivered;
-
+    private Boolean deliverable;
 
     @MongoObjectId
     private
@@ -17,20 +17,21 @@ public class Delivery {
 
     public Delivery(JSONObject data) {
         this.setId(data.getString("id"));
-        this.setIdOrder(data.getString(("idOrder")));
-        this.setDeliveryMan(data.getString("deliveryMan"));
+        this.setOrder(new Order(data.getJSONObject("order")));
+        this.setDeliveryMan(new DeliveryMan(data.getJSONObject("deliveryMan")));
         this.setDelivered(data.getBoolean("delivered"));
+        this.setDeliverable(true);
     }
 
-    public Delivery() {} // ne pas enlever, c'est pour instancier la class avec findOne(...OrderFood.class)
-
+    public Delivery() {}
 
     public JSONObject toJson() {
         return new JSONObject()
                 .put("id", getId())
-                .put("idOrder", getIdOrder())
-                .put("deliveryMan", getDeliveryMan())
-                .put("delivered", getDelivered());
+                .put("idOrder", getOrder().toJson())
+                .put("deliveryMan", getDeliveryMan().toJson())
+                .put("delivered", getDelivered())
+                .put("deliverable", getDeliverable());
     }
 
     public String getId() {
@@ -41,19 +42,19 @@ public class Delivery {
         this.id = id;
     }
 
-    public String getIdOrder() {
-        return idOrder;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setIdOrder(String idOrder) {
-        this.idOrder = idOrder;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
-    public String getDeliveryMan() {
+    public DeliveryMan getDeliveryMan() {
         return deliveryMan;
     }
 
-    public void setDeliveryMan(String deliveryMan) {
+    public void setDeliveryMan(DeliveryMan deliveryMan) {
         this.deliveryMan = deliveryMan;
     }
 
@@ -71,5 +72,13 @@ public class Delivery {
 
     public void set_id(String _id) {
         this._id = _id;
+    }
+
+    public Boolean getDeliverable() {
+        return deliverable;
+    }
+
+    public void setDeliverable(Boolean deliverable) {
+        this.deliverable = deliverable;
     }
 }

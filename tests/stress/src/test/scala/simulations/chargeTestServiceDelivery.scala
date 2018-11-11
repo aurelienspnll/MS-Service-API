@@ -43,19 +43,40 @@ class chargeTestServiceDelivery extends Simulation {
               .body(StringBody(session => buildComplete(session)))
               .check(status.is(200))
           )
+          .exec(
+            http("The customer track the delivery")
+              .post("delivery")
+              .body(StringBody(session => buildTrack(session)))
+              .check(status.is(200))
+          )
+          .pause(1 seconds)
       }
 
   def buildDelivery(session: Session): String = {
     val id = session("id").as[String]
-    raw"""{
-         "event" : "DELIVER",
-         "delivery" : {
-            "id": "$id",
-            "idOrder": "34",
-            "deliveryMan": "Pablo",
-            "delivered": false
-         }
-    }""""
+    raw"""{"event" : "DELIVER",
+                  "delivery" : {
+                     "id": "$id",
+                     "order": {
+                     	"idOrder" : "36",
+                     	"idClient" : "65",
+                     	"clientName" : "Tata",
+                     	"address" : "Rue de Medeline"
+
+                     },
+                     "deliveryMan": {
+                     	"idDeliveryMan" : "2",
+                     	"firstName": "Pablo",
+                     	"lastName" : "Escobar"
+                     },
+                     "delivered": false
+                  }
+         }""""
+  }
+
+  def buildTrack(session: Session): String = {
+    val id = session("id").as[String]
+    raw"""{"event": "TRACK", "id":"$id"}""""
   }
 
   def buildConsult(session: Session): String = {
@@ -67,8 +88,6 @@ class chargeTestServiceDelivery extends Simulation {
     val id = session("id").as[String]
     raw"""{"event": "COMPLETE", "id":"$id"}""""
   }
-
-
 
   setUp(stressSample.inject(rampUsers(20) over (10 seconds)).protocols(httpConf))
 
