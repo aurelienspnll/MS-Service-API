@@ -167,6 +167,30 @@ L'objet JSON dans le body de la Requête pour signaler un problème avec une liv
 ```
 
 
+### 3.4 Service de Feedback
+
+- Post   http://localhost:9130/feedback-service-document/feedback
+- Body -> raw -> application/json
+
+L'objet JSON dans le body de la Requête pour créer un feedback:
+```json
+{	"event" : "FEEDBACK",
+	"feedback" : {
+		"client" : {
+			"id" : "2", 
+			"firstName" : "Luigi", 
+			"lastName" : "DeLaVega"
+		}, 
+		"food" : {
+			"id" : "56", 
+			"name" : "Pizza", 
+			"category" : "Italien"
+		}, 
+		"view" : "La pate est pas mal"
+	}
+}
+```
+
 
 ## 4. Choix de conception pour les différents services
 
@@ -213,9 +237,28 @@ Tous ces cas utilision se prète bien à des évènement tel que :
  - LISTCOMPLETED pour consulter les livraisons effectuées.
  - LISTNOTCOMPLETED pour consulter les livraisons en cours.
  - DELETE pour supprimer les livraisons
+ - TRACK pour suivre les livraisons
+ - PROBLEM pour signaler de problems avec les livraisons
 
 Ce paradigme nous permet de gérer tous ces cas utilisations avec des évènements sur la route: 
 http://localhost:9100/delivery-service-document/delivery
+
+
+### 4.4 Service de FeedBack :
+
+Nous avons choisi d'utiliser le paradigme *Document* comme interface du service de feedback. Il existe beaucoup de cas utilisations pour ce service :
+
+- le client fait une feedback 
+- Le chef peut consulter les différents feedbacks pour améliorer ses repas
+- Le chef peut consulter un feedback en particulier
+
+Tous ces cas utilision se prète bien à des évènement tel que : 
+ - FEEDBACK pour créer un feedback
+ - CONSULT pour consulter un feedback en particulier.
+ - LIST pour consulter tous les feedbacks.
+
+Ce paradigme nous permet de gérer tous ces cas utilisations avec des évènements sur la route: 
+ http://localhost:9130/feedback-service-document/feedback
 
 
 ## 5. Tests
