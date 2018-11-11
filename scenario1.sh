@@ -134,7 +134,7 @@ echo "Jormie est coursier est souhaite consulter les commandes non livré"
 echo "Press any key to continue..."
 read
 
-curl -X POST -H "Content-Type: application/json" -d {"event": "LISTNOTCOMPLETED"} http://localhost:9100/delivery-service-document/delivery
+curl -X POST -H "Content-Type: application/json" -d "{\"event\": \"LISTNOTCOMPLETED\"}" http://localhost:9100/delivery-service-document/delivery
 
 
 echo ""
@@ -165,7 +165,7 @@ curl -X POST -H "Content-Type: application/json" -d "{
   \"event\" : \"ADDPAYMENT\",
   \"payment\" : {
     \"price\": \"20\",
-    \"id\": \"Jamie\"
+    \"id\": \"Jamie\",
     \"type\": \"virement\"
     }
 }" http://localhost:9120/bank-service-document/payment
