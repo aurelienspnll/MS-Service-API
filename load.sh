@@ -4,6 +4,6 @@ cd tests
 
 mvn clean package
 
-cd acceptation
+cd stress
 
-mvn integration-test
+mvn gatling:execute
