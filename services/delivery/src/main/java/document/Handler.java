@@ -4,12 +4,19 @@ import com.mongodb.MongoClient;
 import document.models.Delivery;
 import org.bson.types.ObjectId;
 import org.jongo.Jongo;
+import org.bson.Document;
 import org.jongo.MongoCollection;
 import org.jongo.MongoCursor;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Random;
+import static com.mongodb.client.model.Filters.*;
+import static com.mongodb.client.model.Updates.set;
+
 
 public class Handler {
 
@@ -81,6 +88,70 @@ public class Handler {
     static JSONObject deleteAll() {
         deliveries.drop();
         return new JSONObject().put("allDeleted", true);
+    }
+
+
+    /**
+     * In the future, this method can estimate how much time is left for the delivery man to arrive
+     * @param input id of the delivery man
+     * @return random geographic position
+     */
+    /* VERSION 1 : TRACKING
+    static JSONObject tracking(JSONObject input){
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        String currentTime = sdf.format(cal.getTime());
+        Random rand = new Random();
+        int lat = rand.nextInt(180); //latitude
+        int lon = rand.nextInt(180); //longitude
+        JSONObject answer = new JSONObject();
+        answer.put("realTime", currentTime);
+        answer.put("latitude", lat);
+        answer.put("longitude", lon);
+        return new JSONObject().put("tracking", answer);
+    }
+    */
+
+    /**
+     * Method to track a delivery
+     * In the future, this method can estimate how much time is left for the delivery man to arrive
+     * @param input id of delivery
+     * @return random geographic position
+     */
+    static JSONObject tracking(JSONObject input){
+        String id = input.getString("id");
+        Delivery theOne = deliveries.findOne("{id:#}",id).as(Delivery.class);
+        if (null == theOne) {
+            return new JSONObject().put("tracking", "Delivery not found");
+        }
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        String currentTime = sdf.format(cal.getTime());
+        Random rand = new Random();
+        int lat = rand.nextInt(180); //latitude
+        int lon = rand.nextInt(180); //longitude
+        JSONObject answer = new JSONObject();
+        answer.put("coursier", theOne.getDeliveryMan().getFirstName());
+        answer.put("realTime", currentTime);
+        answer.put("latitude", lat);
+        answer.put("longitude", lon);
+        return new JSONObject().put("tracking", answer);
+    }
+
+    /**
+     * Method to signal a problem for a delivery
+     * @param input id of delivery
+     * @return
+     */
+    static JSONObject problem(JSONObject input){
+        String id = input.getString("id");
+        Delivery theOne = deliveries.findOne("{id:#}",id).as(Delivery.class);
+        if (null == theOne) {
+            return new JSONObject().put("problem", "Delivery not found");
+        }
+        theOne.setDeliverable(false);
+        deliveries.update("{id:#}", id).with("{$set: {'deliverable': 'false'}}");
+        return new JSONObject().put("problem", theOne.toJson());
     }
 
     private static MongoCollection getDeliveries() {
