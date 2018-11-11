@@ -94,7 +94,8 @@ echo "Terry souhaite obtenir des statistiques sur la rapidité et le cout des de
 read
 echo "Pas fait"
 
-
+echo ""
+echo ""
 echo "Jamie a un accident et tiens informer sa boite pour etre remplacé"
 read
 

@@ -4,11 +4,8 @@ cd tests
 
 mvn clean package
 
-cd acceptation
 
-mvn integration-test
-
-
+cd ..
 
 ./scenario1.sh
 
