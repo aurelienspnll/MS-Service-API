@@ -94,3 +94,8 @@ echo "Terry souhaite obtenir des statistiques sur la rapidité et le cout des de
 read
 echo "Pas fait"
 
+
+echo "Jamie a un accident et tiens informer sa boite pour etre remplacé"
+read
+
+curl -X POST -H "Content-Type: application/json" -d "{\"event\": \"PROBLEM\", \"id\":\"6\"}" http://localhost:9100/delivery-service-document/delivery
