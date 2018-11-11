@@ -24,6 +24,9 @@
         <module>around</module>
         <module>bank</module>
         <module>feedback</module>
+        <module>producer</module>
+        <module>delivery-kafka</module>
+        <module>order-kafka</module>
     </modules>
 
     <properties>

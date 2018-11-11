@@ -25,3 +25,9 @@ build eta uberoo/eta-rpc
 build around uberoo/around-rpc
 build bank uberoo/bank-document
 build feedback uberoo/feedback-document
+
+cd producer
+./compile.sh
+cd ..
+cd ..
+docker-compose build

@@ -10,11 +10,19 @@ import org.jongo.MongoCursor;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.apache.kafka.clients.producer.Callback;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.Producer;
+import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
+
 
 class Handler {
 
-    @Autowired
-    private static messageProducer producer = new messageProducer();
+    //@Autowired
+    //private static messageProducer producer = new messageProducer();
+
 
     static JSONObject order(JSONObject input) {
         MongoCollection orders = getOrders();
@@ -34,7 +42,7 @@ class Handler {
             orders.update("{id:#}", id).with("{$set: {'status': 'NOT VALIDATED'}}");
         }
         OrderFood myOrder = orders.findOne("{id:#}",id).as(OrderFood.class);
-        producer.sendMessage("mddddrrmomo");//myOrder.toString());
+        //producer.sendMessage("order");
         return new JSONObject().put("approved", validate).put("orderFood", myOrder.toJson());
     }
 

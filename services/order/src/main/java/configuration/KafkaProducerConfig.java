@@ -5,12 +5,14 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.openejb.testing.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Primary;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 
 import org.springframework.core.env.Environment;
