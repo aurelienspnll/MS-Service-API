@@ -29,13 +29,23 @@ public class Handler {
         return new JSONObject().put("inserted", true).put("delivery",data.toJson());
     }
 
+    static JSONObject assign(JSONObject input) {
+        String id = input.getString("id");
+        Delivery theOne = deliveries.findOne("{id:#}", id).as(Delivery.class);
+        if (null == theOne) {
+            return new JSONObject().put("assigned", false);
+        }
+        deliveries.update("{id:#}", id).with("{$set: {'deliveryMan':#}}", input.getString("deliveryMan"));
+        return new JSONObject().put("assigned", true).put("delivery", theOne.toJson());
+    }
+
     static JSONObject complete(JSONObject input) {
         String id = input.getString("id");
         Delivery theOne = deliveries.findOne("{id:#}", id).as(Delivery.class);
         if (null == theOne) {
             return new JSONObject().put("completed", false);
         }
-        deliveries.update("{id:#}", id).with("{$set: {'delivered': 'true'}}");
+        deliveries.update("{id:#}", id).with("{$set: {'delivered': true}}");
         return new JSONObject().put("completed", true).put("delivery", theOne.toJson());
     }
 
