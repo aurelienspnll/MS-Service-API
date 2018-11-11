@@ -134,6 +134,23 @@ public class Handler {
         answer.put("longitude", lon);
         return new JSONObject().put("tracking", answer);
     }
+
+    /**
+     * Method to signal a problem for a delivery
+     * @param input id of delivery
+     * @return
+     */
+    static JSONObject problem(JSONObject input){
+        String id = input.getString("id");
+        Delivery theOne = deliveries.findOne("{id:#}",id).as(Delivery.class);
+        if (null == theOne) {
+            return new JSONObject().put("problem", "Delivery not found");
+        }
+        theOne.setDeliverable(false);
+        deliveries.update("{id:"+id+"}", theOne);
+        return new JSONObject().put("problem", theOne.toJson());
+    }
+
     private static MongoCollection getDeliveries() {
         MongoClient client = new MongoClient(Network.HOST, Network.PORT);
         return new Jongo(client.getDB(Network.DATABASE)).getCollection(Network.COLLECTION);

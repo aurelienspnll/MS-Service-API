@@ -9,6 +9,7 @@ public class Delivery {
     private Order order;
     private DeliveryMan deliveryMan;
     private Boolean delivered;
+    private Boolean deliverable;
 
     @MongoObjectId
     private
@@ -19,6 +20,7 @@ public class Delivery {
         this.setOrder(new Order(data.getJSONObject("order")));
         this.setDeliveryMan(new DeliveryMan(data.getJSONObject("deliveryMan")));
         this.setDelivered(data.getBoolean("delivered"));
+        this.setDeliverable(true);
     }
 
     public Delivery() {}
@@ -28,7 +30,8 @@ public class Delivery {
                 .put("id", getId())
                 .put("idOrder", getOrder().toJson())
                 .put("deliveryMan", getDeliveryMan().toJson())
-                .put("delivered", getDelivered());
+                .put("delivered", getDelivered())
+                .put("deliverable", getDeliverable());
     }
 
     public String getId() {
@@ -69,5 +72,13 @@ public class Delivery {
 
     public void set_id(String _id) {
         this._id = _id;
+    }
+
+    public Boolean getDeliverable() {
+        return deliverable;
+    }
+
+    public void setDeliverable(Boolean deliverable) {
+        this.deliverable = deliverable;
     }
 }
