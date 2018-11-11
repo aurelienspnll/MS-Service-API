@@ -22,8 +22,9 @@ si ce n'est pas le cas :
  
 ### 2.2 Lancer les services
 
-- A la racine du projet, exécuter la commande : ./install.sh pour créer les images docker  
-- Ensuite exécuter la commande ./run.sh pour lancer les services.
+- A la racine du projet, exécuter la commande pour créer les images docker: ./install.sh 
+- Ensuite exécuter la commande pour créer les containers: docker-compose -d up
+- Finalement la commande pour lancer les tests de stress et d'acceptation: ./run.sh
 
 
  ## 3. Services
@@ -68,8 +69,8 @@ L'objet JSON dans le body de la Requête pour purger la base de données:
 { "event": "PURGE"} 
 ```
 
-### 3.2 Service ressource catalogue de repas
 
+### 3.2 Service ressource catalogue de repas
 
 La Requête pour ajouter des repas dans le catalogue :
 
@@ -83,6 +84,7 @@ L'objet JSON dans le body:
    {
      "name": "tarte aux pommes",
      "description": "Tarte sucrée, faite d'une pâte feuilletée garnie de pommes émincées.",
+     "category": "dessert",
      "price": 3.5
    }
 }
@@ -90,6 +92,11 @@ L'objet JSON dans le body:
 La Requête pour afficher le catalogue :
 
 - Get  http://localhost:9090/food-service-rest/foods
+
+La Requête pour afficher le catalogue filtré par catégories:
+
+- Get  http://localhost:9090/food-service-rest/foods?cat=asian
+
 
 
 ### 3.3 Service de livraison
@@ -99,13 +106,22 @@ La Requête pour afficher le catalogue :
 
 L'objet JSON dans le body de la Requête pour créer une livraison et l'assigner:
 ```json
-{ 
-  "event" : "DELIVER", 
-  "delivery" : {
-    "deliveryMan": "Escobar",
-    "delivered": "false",
-    "id": "6",
-    "idOrder": "521"
+{
+"event" : "DELIVER",
+    "delivery" : {
+       "id": "12",
+       "order": {
+        "idOrder" : "36",
+        "idClient" : "65",
+        "clientName" : "Tata",
+        "address" : "Rue de Medeline"
+       },
+    "deliveryMan": {
+        "idDeliveryMan" : "2",
+        "firstName": "Pablo",
+        "lastName" : "Escobar"
+       },
+    "delivered": false
     }
 }
 ```
@@ -140,6 +156,16 @@ L'objet JSON dans le body de la Requête pour supprimer une livraison:
 {"event": "DELETE", "id":"6"}
 ```
 
+L'objet JSON dans le body de la Requête pour suivre une livraison:
+```json
+{"event": "TRACK", "id":"6"}
+```
+
+L'objet JSON dans le body de la Requête pour signaler un problème avec une livraison:
+```json
+{"event": "PROBLEM", "id":"6"}
+```
+
 
 
 ## 4. Choix de conception pour les différents services
@@ -153,6 +179,7 @@ Ce paradigme nous offre une grande modularité:
 
 - On pourrait ajouter un autre chemins très aisément afin de compléter ce service de catalogue comme par exemple :
 hhttp://localhost:9090/food-service-rest/foods/id_food pour afficher le detail d'un repas.
+ 
  
 ### 4.2 Service de commande :
 
@@ -168,6 +195,7 @@ Tous ces cas utilision se prète bien à des évènement tel que :
  - CONSULT pour consulter la liste des commandes
  
 Ce paradigme nous permet ,à travers des évènements, de gérer tous ces cas utilisations avec la même route: http://localhost:9080/order-service-document/ordersFood.
+
 
 ### 4.3 Service de livraison :
 
@@ -198,8 +226,8 @@ Attention pour faire les tests de charge, il faut une version de java compatible
 
 ### 5.2 Lancer les tests (scenario + charge)
 
-- Lancer les services (./install.sh puis ./run.sh) 
-- Lancer ./tests.sh
+- Lancer les services (./install.sh puis docker-compose up -d) 
+- Lancer ./run.sh
 
 
 ## 6. Docker 
@@ -223,7 +251,6 @@ nous permet d’avoir chaque service conteneurisé comme une boite noire.
 - Mohamed Chennouf
 - Andreina Wilhelm
 - Aurélien Spinelli
-- Thibault Bondon
 
  
 

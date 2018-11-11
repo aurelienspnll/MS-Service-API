@@ -28,7 +28,7 @@ public class Delivery {
     public JSONObject toJson() {
         return new JSONObject()
                 .put("id", getId())
-                .put("idOrder", getOrder().toJson())
+                .put("order", getOrder().toJson())
                 .put("deliveryMan", getDeliveryMan().toJson())
                 .put("delivered", getDelivered())
                 .put("deliverable", getDeliverable());

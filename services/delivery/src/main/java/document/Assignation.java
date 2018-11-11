@@ -26,6 +26,8 @@ public class Assignation {
                     return Response.ok().entity(deliver(obj).toString(INDENT_FACTOR)).build();
                 case COMPLETE:
                     return Response.ok().entity(complete(obj).toString(INDENT_FACTOR)).build();
+                case ASSIGN:
+                    return Response.ok().entity(assign(obj).toString(INDENT_FACTOR)).build();
                 case CONSULT:
                     return Response.ok().entity(consult(obj).toString(INDENT_FACTOR)).build();
                 case LIST:
