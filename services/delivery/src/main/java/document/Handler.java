@@ -4,6 +4,7 @@ import com.mongodb.MongoClient;
 import document.models.Delivery;
 import org.bson.types.ObjectId;
 import org.jongo.Jongo;
+import org.bson.Document;
 import org.jongo.MongoCollection;
 import org.jongo.MongoCursor;
 import org.json.JSONObject;
@@ -13,6 +14,9 @@ import java.util.List;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
+import static com.mongodb.client.model.Filters.*;
+import static com.mongodb.client.model.Updates.set;
+
 
 public class Handler {
 
@@ -21,7 +25,6 @@ public class Handler {
 
     static JSONObject deliver(JSONObject input) {
         Delivery data = new Delivery(input.getJSONObject("delivery"));
-
         deliveries.insert(data);
         return new JSONObject().put("inserted", true).put("delivery",data.toJson());
     }
@@ -147,7 +150,7 @@ public class Handler {
             return new JSONObject().put("problem", "Delivery not found");
         }
         theOne.setDeliverable(false);
-        deliveries.update("{id:"+id+"}", theOne);
+        deliveries.update("{id:#}", id).with("{$set: {'deliverable': 'false'}}");
         return new JSONObject().put("problem", theOne.toJson());
     }
 
