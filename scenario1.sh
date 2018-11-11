@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "Scenario 1: Gail une étudiante une pizza sur uberoo"
+echo "Scenario 1: Gail une étudiante une pizza sur uberoo, Jamie le coursien et Jordan le chef du restaurant"
 
 echo ""
 
